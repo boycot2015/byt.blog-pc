@@ -28,7 +28,7 @@ defineOptions({ name: 'Blog' })
 <template>
   <div class="blog-index">
     <Banner :data="setting.banner" />
-    <div v-if="indexData.newLeast" class="mt-[15px]">
+    <div v-if="indexData.newLeast" class="mt-[15px] w-[100%]">
       <div
         v-for="post in indexData.newLeast"
         :key="post.id"

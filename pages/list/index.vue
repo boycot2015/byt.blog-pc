@@ -14,10 +14,11 @@ const indexData = ref(data.value?.data || {})
 </script>
 
 <template>
-  <div class="blog-list">
+  <div class="blog-list w-[100%]">
     <div
       v-for="post in indexData[0]"
       :key="post.id"
+      class="w-[100%]"
     >
       <Item :data="post" :loading="pageLoading" />
     </div>

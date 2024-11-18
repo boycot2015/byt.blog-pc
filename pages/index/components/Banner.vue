@@ -1,8 +1,8 @@
 <template>
   <div>
     <!-- type="card"  -->
-    <el-carousel height="400px" autoplay>
-      <el-carousel-item v-for="item in data" :key="item.url">
+    <el-carousel height="auto" autoplay>
+      <el-carousel-item v-for="item in data" :key="item.url" class="!h-[300px]">
         <el-image :src="item.url" fit="cover" :alt="item.title" />
       </el-carousel-item>
     </el-carousel>

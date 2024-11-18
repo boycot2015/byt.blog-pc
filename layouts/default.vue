@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <div class="dark:bg-black min-h-[100vh] w-full pb-[--gap]">
     <Header />
-    <div class="md:max-w-[1200px] mx-[auto] my-[20px] flex justify-between">
-      <main class="w-[100%] md:w-[1000px] min-h-[38rem]">
+    <div class="w-full max-w-[1200px] mx-[auto] my-[20px] flex flex-col md:flex-row justify-between">
+      <main class="min-h-[100vh] dark:text-white p-[--gap] md:p-0">
         <slot />
       </main>
-      <Aside class="hidden md:block md:w-[180px] ml-[var(--gap)]" />
+      <Aside class="hidden lg:block w-[180px] ml-[--gap]" />
       <el-backtop />
     </div>
     <Footer />

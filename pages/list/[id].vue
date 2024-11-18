@@ -26,12 +26,14 @@ definePageMeta({
   <div class="centered">
     <NuxtLayout name="custom">
       <!-- <NuxtWelcome /> -->
-      <div class="flex justify-start mb-[--gap]">
-        <h3 class="self-start flex-2 text-left">
+      <div class="flex flex-col justify-start mb-[--gap] text-left">
+        <h3 class="self-start flex-2 mb-[--gap]">
           {{ indexData.title }}
         </h3>
-        <span class="category flex-1">{{ indexData.category?.value || '--' }}</span>
-        <span class="tag flex-1">{{ indexData.tags.map(_ => _.value) }}</span>
+        <div class="tags flex-1 mb-[--gap]">
+          <span class="category flex-1 mr-[--gap]">{{ indexData.category?.value || '--' }}</span>
+          <el-tag class="tag  mr-[--gap]" v-for="tag in indexData.tags" :key="tag.value">{{ tag.value }}</el-tag>
+        </div>
         <span class="time flex-1">{{ new Date(indexData.updateTime).toLocaleString() }}</span>
       </div>
       <client-only>
