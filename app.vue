@@ -1,11 +1,13 @@
 <template>
   <NuxtRouteAnnouncer />
   <NuxtLoadingIndicator />
-  <Layout />
+  <NuxtLayout>
+    <NuxtPage />
+  </NuxtLayout>
 </template>
 
 <script setup lang="ts">
-import Layout from '@/layouts/index.vue'
+useSeoMeta({ title: 'Home', description: 'Welcome to the Nuxt 3 starter template' })
 </script>
 
 <style>

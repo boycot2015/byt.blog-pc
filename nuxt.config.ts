@@ -13,20 +13,20 @@ export default defineNuxtConfig({
       charset: 'utf-8',
       viewport: 'width=device-width, initial-scale=1',
     },
-    pageTransition: {
+    // pageTransition: {
+    //   name: 'fade',
+    //   mode: 'out-in', // 默认值
+    // },
+    layoutTransition: {
       name: 'fade',
       mode: 'out-in', // 默认值
     },
-    layoutTransition: {
-      name: 'slide',
-      mode: 'out-in', // 默认值
-    },
   },
-  css: ['~/assets/css/main.css', 'element-plus/dist/index.css'],
+  css: ['~/assets/scss/vars.scss', '~/assets/css/main.css', 'element-plus/dist/index.css'],
   // Env variables - https://nuxt.com/docs/getting-started/configuration#environment-variables-and-private-tokens
   runtimeConfig: {
     public: {
-      apiBase: 'https://blog-api.boycot.top/',
+      apiBase: 'https://blog-api.boycot.top',
       // Can be overridden by NUXT_PUBLIC_HELLO_TEXT environment variable
       helloText: 'Hello from the Edge 👋',
     },
@@ -36,15 +36,15 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-07-30',
   // https://hub.nuxt.com/docs/getting-started/installation#options
   hub: {},
-  vite: {
-    css: {
-      preprocessorOptions: {
-        scss: {
-          additionalData: '@use "@/assets/scss/vars.scss" as *;',
-        },
-      },
-    },
-  },
+  // vite: {
+  //   css: {
+  //     preprocessorOptions: {
+  //       scss: {
+  //         additionalData: '@use "@/assets/scss/vars.scss";',
+  //       },
+  //     },
+  //   },
+  // },
   postcss: {
     plugins: {
       tailwindcss: {},

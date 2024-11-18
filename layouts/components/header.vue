@@ -1,0 +1,43 @@
+<template>
+  <div>
+    <div class="text-center border-b leading-[60px]">
+      <div class="max-w-[1200px] mx-[auto] flex items-center">
+        <el-tabs v-model="activeTab" class="max-w-[1200px] mx-[auto]" @tab-click="onTabClick">
+          <el-tab-pane name="index" label="index" />
+          <el-tab-pane name="list" label="list" />
+          <el-tab-pane name="about" label="about" />
+          <el-tab-pane name="demo" label="demo" />
+        </el-tabs>
+        <el-icon :size="24" class="cursor-pointer">
+          <Setting />
+        </el-icon>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { Setting } from '@element-plus/icons-vue'
+
+const router = useRouter()
+const route = useRoute()
+const activeTab = useState('activeTab', () => route.name || 'index')
+const onTabClick = () => {
+  nextTick(() => {
+    router.push({ name: activeTab.value })
+  })
+}
+defineOptions({
+  name: 'LayoutHeader',
+})
+</script>
+
+<style lang="scss" scoped>
+:deep(.el-tabs__nav-wrap:after) {
+    height: 0;
+}
+:deep(.el-tabs__header) {
+    margin: 0;
+    --el-tabs-header-height: 60px;
+}
+</style>
