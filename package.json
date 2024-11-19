@@ -14,9 +14,11 @@
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.1",
     "@nuxt/eslint": "^0.6.1",
+    "@nuxt/image": "^1.8.1",
     "@nuxthub/core": "^0.8.5",
     "@nuxtjs/tailwindcss": "^6.12.2",
     "@pinia/nuxt": "^0.7.0",
+    "dayjs": "^1.11.13",
     "element-plus": "^2.8.7",
     "nuxt": "^3.14.0",
     "pinia": "^2.2.6",

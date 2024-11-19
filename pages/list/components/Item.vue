@@ -15,12 +15,12 @@
       <div class="mt-[15px]">
         <nuxt-link :to="`/list/${data.id}`">
           <div class="flex mb-[--gap] bg-white rounded-md overflow-hidden shadow-xl">
-            <el-image :src="data.imgUrl" fit="cover" class="w-[140px] h-[100px] md:w-[240px] md:h-[160px]" />
+            <el-image :src="data.imgUrl || data.content?getImgUrl(data.content):''" fit="cover" class="w-[140px] h-[100px] md:w-[240px] md:h-[160px]" />
             <div class="flex-1 ml-[--gap] p-4">
-              <div class="title mb-[--gap]">
+              <div class="title line-clamp-1 mb-[--gap]">
                 {{ data.title }}
               </div>
-              <div class="desc line-clamp-2 min-h-[40px]" v-html="data.content" />
+              <div v-if="data.content" class="desc line-clamp-2 min-h-[40px] max-w-[100%]" v-html="data.content.replace(getImgUrl(data.content), '')" />
             </div>
           </div>
         </nuxt-link>
@@ -30,6 +30,8 @@
 </template>
 
 <script setup>
+import { getImgUrl } from '@/utils'
+
 defineProps({
   data: {
     type: Object,
