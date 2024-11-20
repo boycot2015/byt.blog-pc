@@ -2,6 +2,7 @@
 export default defineNuxtConfig({
   // https://nuxt.com/modules
   modules: [
+    '@nuxt/image',
     '@nuxthub/core',
     '@nuxt/eslint',
   ],
@@ -12,6 +13,7 @@ export default defineNuxtConfig({
       // titleTemplate: '%s | 博客',
       charset: 'utf-8',
       viewport: 'width=device-width, initial-scale=1',
+      script: ['https://cdn.bootcdn.net/ajax/libs/skycons/1396634940/skycons.min.js'],
     },
     // pageTransition: {
     //   name: 'fade',
@@ -22,7 +24,8 @@ export default defineNuxtConfig({
       mode: 'out-in', // 默认值
     },
   },
-  css: ['~/assets/scss/vars.scss', '~/assets/css/main.css', 'element-plus/dist/index.css'],
+  // '~/assets/scss/vars.scss',
+  css: ['~/assets/css/main.css', 'element-plus/dist/index.css'],
   // Env variables - https://nuxt.com/docs/getting-started/configuration#environment-variables-and-private-tokens
   runtimeConfig: {
     public: {
@@ -36,15 +39,16 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-07-30',
   // https://hub.nuxt.com/docs/getting-started/installation#options
   hub: {},
-  // vite: {
-  //   css: {
-  //     preprocessorOptions: {
-  //       scss: {
-  //         additionalData: '@use "@/assets/scss/vars.scss";',
-  //       },
-  //     },
-  //   },
-  // },
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          api: 'modern-compiler',
+          additionalData: '@use "~/assets/scss/vars.scss" as *;',
+        },
+      },
+    },
+  },
   postcss: {
     plugins: {
       tailwindcss: {},
@@ -58,5 +62,8 @@ export default defineNuxtConfig({
         quotes: 'single',
       },
     },
+  },
+  image: {
+    dir: 'assets/images',
   },
 })

@@ -3,15 +3,10 @@
     --color-primary: #2dd4bf;
     --border-color: #eee;
     --text-color: #333;
-    --text-color-666: #666;
+    --text-color-666: hsl(0, 0%, 40%);
     --text-color-ccc: #ccc;
     --text-color-white: white;
     --gap: 15px;
     --border-radius: 5px;
     --el-color-primary: var(--color-primary) !important;
 }
-$primary: var(--color-primary);
-$white: var(--text-color-white);
-$c-333: var(--text-color-333);
-$c-666: var(--text-color-666);
-$c-ccc: var(--text-color-ccc);
