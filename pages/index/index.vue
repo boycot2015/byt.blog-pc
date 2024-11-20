@@ -26,7 +26,7 @@ defineOptions({ name: 'Blog' })
 </script>
 
 <template>
-  <div class="blog-index">
+  <div class="blog-index w-[100%]">
     <Banner :data="setting.banner" />
     <div v-if="indexData && indexData.newLeast" class="mt-[15px] w-[100%]">
       <div

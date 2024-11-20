@@ -38,7 +38,7 @@ const getData = ({ page = 1, size = 10 } = {}) => {
     <div
       v-for="post in indexData[0]"
       :key="post.id"
-      class="w-[100%]"
+      class="w-[100%] md:w-[960px]"
     >
       <Item :data="post" :loading="pageLoading" />
     </div>

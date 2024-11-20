@@ -1,33 +1,33 @@
 <template>
   <div>
     <aside class="sticky top-5 !w-[220px]">
-      <el-card class="mb-[--gap]" body-class="dark:bg-black dark:text-white !p-0">
+      <el-card class="mb-[--gap]" body-class="dark:bg-black dark:text-white !p-[--gap]">
         <template #header>
           <Calendar />
         </template>
         <TimeCanvas
-          :width="220"
-          :x="10"
+          :width="200"
+          :x="0"
           :y="18"
           :height="60"
-          :radius="0.7"
+          :radius="0.6"
           class="dark:bg-black"
         />
       </el-card>
-      <el-card class="mb-[--gap]" body-class="dark:bg-black dark:text-white !p-0">
+      <el-card class="mb-[--gap] !border-none" body-class="dark:bg-black dark:text-white !p-0">
         <WeatherComponent />
       </el-card>
-      <el-card v-loading="cateLoading" class="mb-[--gap]" body-class="dark:bg-black dark:text-white !p-0">
+      <el-card v-loading="cateLoading" class="mb-[--gap]" body-class="min-h-[100px] max-h-[160px] overflow-y-auto dark:bg-black dark:text-white !p-[--gap]">
         <template #header>
           <div class="flex justify-between">
             <div>
               <span>分类</span><span>({{ cateCount }})</span>
             </div>
-            <span><el-icon><More /></el-icon></span>
+            <el-tooltip content="更多"><span class="cursor-pointer" @click="$router.push('/list')"><el-icon><More /></el-icon></span></el-tooltip>
           </div>
         </template>
         <el-tag
-          v-for="cate in categories.slice(0, 7)"
+          v-for="cate in categories.slice(0,)"
           :key="cate.id"
           size="small"
           class="mr-[5px] mb-[5px]"
@@ -36,17 +36,17 @@
           {{ cate.value }}
         </el-tag>
       </el-card>
-      <el-card v-loading="tagLoading" class="mb-[--gap]" body-class="dark:bg-black dark:text-white !p-0">
+      <el-card v-loading="tagLoading" class="mb-[--gap]" body-class="min-h-[100px] max-h-[160px] overflow-y-auto dark:bg-black dark:text-white !p-[--gap]">
         <template #header>
           <div class="flex justify-between">
             <div>
               <span>标签</span><span>({{ tagsCount }})</span>
             </div>
-            <span><el-icon><More /></el-icon></span>
+            <el-tooltip content="更多"><span class="cursor-pointer" @click="$router.push('/list')"><el-icon><More /></el-icon></span></el-tooltip>
           </div>
         </template>
         <el-tag
-          v-for="tag in tags.slice(0, 7)"
+          v-for="tag in tags.slice(0,)"
           :key="tag.id"
           size="small"
           class="mr-[5px] mb-[5px]"
@@ -58,7 +58,14 @@
     </aside>
   </div>
 </template>
-
+<style lang="scss" scoped>
+.el-card {
+  background-color: transparent;
+}
+:deep(.el-card__header) {
+  padding: 5px var(--gap);
+}
+</style>
 <script setup>
 import { More } from '@element-plus/icons-vue'
 

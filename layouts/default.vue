@@ -5,7 +5,7 @@
       <main class="min-h-[100vh] dark:text-white p-[--gap] md:p-0">
         <slot />
       </main>
-      <Aside class="hidden lg:block w-[180px] ml-[--gap]" />
+      <Aside class="hidden lg:block w-[220px] ml-[--gap]" />
       <el-backtop />
     </div>
     <Footer />

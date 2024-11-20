@@ -1,9 +1,11 @@
 :root {
     --main-bg: #f0f2f5;
     --color-primary: #2dd4bf;
-    --border-color: #eee;
+    --border-color: #e8e8e8;
     --text-color: #333;
+    --text-color-333: #333;
     --text-color-666: #666;
+    --text-color-999: #999;
     --text-color-ccc: #ccc;
     --text-color-white: white;
     --gap: 15px;
@@ -14,4 +16,8 @@ $primary: var(--color-primary);
 $white: var(--text-color-white);
 $c-333: var(--text-color-333);
 $c-666: var(--text-color-666);
+$c-999: var(--text-color-999);
 $c-ccc: var(--text-color-ccc);
+$c-e8: var(--border-color);
+$bg: var(--main-bg);
+$border-radius: var(--border-radius);

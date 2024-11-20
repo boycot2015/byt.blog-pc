@@ -18,7 +18,7 @@ const onOpen = (item) => {
 <template>
   <div class="blog-index">
     <NuxtLayout name="custom">
-      <div class="about pd20 w-[1000px] mx-[auto] bgf text-left">
+      <div class="about pd20 md:w-[1000px] mx-[auto] bgf text-left">
         <div class="title text-center mb-[--gap]">
           <h3>关于我</h3>
         </div>
@@ -49,24 +49,29 @@ const onOpen = (item) => {
           <h3 class="title mb-[--gap]">
             我的作品
           </h3>
-          <div class="list flex items-center justify-around">
-            <div
+          <el-row class="list" :gutter="16">
+            <el-col
+            :span="12"
+            :md="{span: 6}"
               v-for="item in websiteConfig.links"
               :key="item.name"
-              class="list-item flex-1"
               :title="item.name"
             >
               <a
-                class="list-item-link"
+                class="list-item mb-[--gap]"
                 :target="item.targetType"
                 :href="item.url"
                 @click="onOpen(item)"
               >
-                <div class="img" :style="{ background: `url(${item.imgUrl}) center/cover no-repeat` }">
-                  <NuxtImg :src="item.imgUrl" alt="" />
+                <div class="img overflow-hidden m-[auto] text-center" :style="{ background: `url(${item.imgUrl}) center/cover no-repeat` }">
+                  <el-image :src="item.imgUrl" alt="" class="!border-none" />
                 </div>
                 <div class="flex bottom items-center justify-between">
-                  <p class="name line-clamp-1 tl" :title="item.name">{{ item.name }}</p>
+                  <client-only>
+                    <el-tooltip :content="item.name">
+                      <p class="name line-clamp-1 text-[white] dark:text-[--text-color-333]">{{ item.name }}</p>
+                    </el-tooltip>
+                  </client-only>
                   <div v-if="item.tags" class="flex items-center">
                     <el-tag
                       v-for="tag in item.tags"
@@ -77,8 +82,8 @@ const onOpen = (item) => {
                   </div>
                 </div>
               </a>
-            </div>
-          </div>
+            </el-col>
+          </el-row>
         </div>
       </div>
     </NuxtLayout>
@@ -112,10 +117,10 @@ const onOpen = (item) => {
       }
   }
   .list {
-      display: inline-grid;
-      grid-template-columns: auto auto auto auto;
-      grid-template-rows: auto auto auto auto;
-      grid-gap: 20px;
+      // display: inline-grid;
+      // grid-template-columns: auto auto auto auto;
+      // grid-template-rows: auto auto auto auto;
+      // grid-gap: 20px;
       &-item {
           font-size: 16px;
           cursor: pointer;

@@ -1,0 +1,21 @@
+@use './vars.scss';
+@font-face {
+    font-family: 'MI Lan Pro';  /* Mi Lan Pro */
+    src: url('../fonts/miLanPro.woff') format('woff');
+  }
+  @font-face {
+    font-family: 'Font Awesome 6 Free';  /* Font Awesome 6 Free */
+    src: url('../fonts/fa-regular-400.ttf') format('woff');
+  }
+  @font-face {
+    font-family: 'black';  /* black */
+    src: url('../fonts/black.ttf') format('woff');
+  }
+html,body, #__nuxt, #__layout {
+//   height: 100%;
+// Microsoft YaHei，MI Lan Pro,sans-serif Georgia, serif 宋体，楷体，隶书，幼圆
+ line-height: 1.5;
+ font-family: "MI Lan Pro", "black","Font Awesome 6 Free";
+//  font-family:'楷体',Arial,Helvetica,"Microsoft Yahei","Hiragino Sans GB","Heiti SC","WenQuanYi Micro Hei" sans-serif;
+  transition: color 300ms, background-color 300ms;
+}

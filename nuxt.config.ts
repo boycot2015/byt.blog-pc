@@ -15,17 +15,17 @@ export default defineNuxtConfig({
       viewport: 'width=device-width, initial-scale=1',
       script: ['https://cdn.bootcdn.net/ajax/libs/skycons/1396634940/skycons.min.js'],
     },
-    // pageTransition: {
-    //   name: 'fade',
-    //   mode: 'out-in', // 默认值
-    // },
+    pageTransition: {
+      name: 'fade',
+      mode: 'out-in', // 默认值
+    },
     layoutTransition: {
       name: 'fade',
       mode: 'out-in', // 默认值
     },
   },
   // '~/assets/scss/vars.scss',
-  css: ['~/assets/css/main.css', 'element-plus/dist/index.css'],
+  css: ['~/assets/css/main.css', '~/assets/scss/index.scss', 'element-plus/dist/index.css'],
   // Env variables - https://nuxt.com/docs/getting-started/configuration#environment-variables-and-private-tokens
   runtimeConfig: {
     public: {

@@ -7,9 +7,11 @@
         <el-tab-pane name="about" label="关于" />
         <el-tab-pane name="demo" label="demo" />
       </el-tabs>
-      <el-icon :size="24" class="cursor-pointer">
-        <Setting />
-      </el-icon>
+      <div class="hidden md:block">
+        <el-icon :size="24" class="cursor-pointer">
+          <Setting />
+        </el-icon>
+      </div>
     </div>
   </div>
 </template>

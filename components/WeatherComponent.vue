@@ -21,7 +21,7 @@
       </div> -->
       <!-- <span class="close" @click.stop="showWeather = false">×</span> -->
     </div>
-    <div ref="dialogRef" class="dialog-content" :class="state.viewMore && 'active'">
+    <div ref="dialogRef" class="dialog-content hidden" :class="state.viewMore && 'active'">
       <div class="dialog-main">
         <div class="top">
           <div class="panels location">
