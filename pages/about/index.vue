@@ -51,10 +51,10 @@ const onOpen = (item) => {
           </h3>
           <el-row class="list" :gutter="16">
             <el-col
-            :span="12"
-            :md="{span: 6}"
               v-for="item in websiteConfig.links"
               :key="item.name"
+              :span="12"
+              :md="{ span: 6 }"
               :title="item.name"
             >
               <a
@@ -63,24 +63,28 @@ const onOpen = (item) => {
                 :href="item.url"
                 @click="onOpen(item)"
               >
-                <div class="img overflow-hidden m-[auto] text-center" :style="{ background: `url(${item.imgUrl}) center/cover no-repeat` }">
-                  <el-image :src="item.imgUrl" alt="" class="!border-none" />
-                </div>
-                <div class="flex bottom items-center justify-between">
-                  <client-only>
-                    <el-tooltip :content="item.name">
-                      <p class="name line-clamp-1 text-[white] dark:text-[--text-color-333]">{{ item.name }}</p>
-                    </el-tooltip>
-                  </client-only>
-                  <div v-if="item.tags" class="flex items-center">
-                    <el-tag
-                      v-for="tag in item.tags"
-                      :key="tag"
-                      type="primary"
-                      size="small"
-                    >{{ tag }}</el-tag>
+                <el-card body-class="!p-0">
+                  <div class="img overflow-hidden m-[auto] text-center" :style="{ background: `url(${item.imgUrl}) center/cover no-repeat` }">
+                    <el-image :src="item.imgUrl" alt="" class="!border-none" />
                   </div>
-                </div>
+                  <template #footer>
+                    <div class="flex bottom items-center justify-between">
+                      <client-only>
+                        <el-tooltip :content="item.name">
+                          <p class="name line-clamp-1 text-[white] dark:text-[--text-color-333]">{{ item.name }}</p>
+                        </el-tooltip>
+                      </client-only>
+                      <div v-if="item.tags" class="flex items-center">
+                        <el-tag
+                          v-for="tag in item.tags"
+                          :key="tag"
+                          type="primary"
+                          size="small"
+                        >{{ tag }}</el-tag>
+                      </div>
+                    </div>
+                  </template>
+                </el-card>
               </a>
             </el-col>
           </el-row>
@@ -150,8 +154,8 @@ const onOpen = (item) => {
               }
           }
           .bottom {
-              padding: 10px 5px;
-              border-top: 1px solid $c-ccc;
+              // padding: 10px 5px;
+              // border-top: 1px solid $c-ccc;
               .name {
                   max-width: 100px;
               }

@@ -19,3 +19,26 @@ html,body, #__nuxt, #__layout {
 //  font-family:'楷体',Arial,Helvetica,"Microsoft Yahei","Hiragino Sans GB","Heiti SC","WenQuanYi Micro Hei" sans-serif;
   transition: color 300ms, background-color 300ms;
 }
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+/* 进入dark模式和退出dark模式时，两个图像的位置顺序正好相反 */
+
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  z-index: 9999;
+}
+
+/* 根据自己选择器修改 */
+html.dark::view-transition-old(root) {
+  z-index: 9999;
+}
+html.dark::view-transition-new(root) {
+  z-index: 1;
+}

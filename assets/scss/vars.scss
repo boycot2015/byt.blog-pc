@@ -12,6 +12,11 @@
     --border-radius: 5px;
     --el-color-primary: var(--color-primary) !important;
 }
+html.dark {
+    /* 自定义深色背景颜色 */
+    --el-bg-color: var(--main-bg);
+    --el-primary-color: var(--text-color);
+}
 $primary: var(--color-primary);
 $white: var(--text-color-white);
 $c-333: var(--text-color-333);

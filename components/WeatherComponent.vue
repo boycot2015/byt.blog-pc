@@ -11,7 +11,8 @@
         {{ weather.location.name }}市
       </div>
       <div v-if="weather && weather.now" class="weather" :style="{ 'font-size': weather.now.text.length > 3 && '28px' }">
-        {{ weather.now.text }}
+        <!-- {{ weather.now.text }} -->
+        <el-image class="!bg-[transparent] h-[80px]" :src="'svg/' + icons[weather.now.text] + '.svg'" />
       </div>
       <div v-if="weather && weather.now" class="temperature">
         {{ weather.now.temperature }}℃
@@ -81,9 +82,48 @@
   </div>
 </template>
 
+<script>
+</script>
+
 <script setup>
 // import axios from '@/api/axios'
 import { apiUrl } from '@/api/baseUrl'
+
+const icons = ref({
+  阴: 'cloud',
+  小雨: 'rain',
+  晴: 'sunny',
+  多云: 'cloudy',
+})
+const initSkycons = (text) => {
+  const icons = {
+    阴: 'PARTLY_CLOUDY_DAY',
+    小雨: 'RAIN',
+  }
+
+  const skycons = new window.Skycons({ color: 'black' })
+  // on Android, a nasty hack is needed: {"resizeClear": true}
+
+  // you can add a canvas by it's ID...
+  skycons.add('weather-icon', window.Skycons[icons[text]])
+
+  // ...or by the canvas DOM element itself.
+  // skycons.add(document.getElementById('icon2'), Skycons.RAIN)
+
+  // if you're using the Forecast API, you can also supply
+  // strings: "partly-cloudy-day" or "rain".
+
+  // start animation!
+  skycons.play()
+
+  // you can also halt animation with skycons.pause()
+
+  // want to change the icon? no problem:
+  skycons.set('weather-icon', window.Skycons[icons[text]])
+
+  // want to remove one altogether? no problem:
+  // skycons.remove('icon2')
+}
 
 const state = reactive({
   weathers: [],
@@ -168,10 +208,6 @@ onMounted(() => {
   setInterval(() => {
     initNow()
   }, 15 * 1000)
-  // window.addEventListener('dblclick', (e) => {
-  //   e.stopPropagation()
-  //   state.showWeather = !state.showWeather
-  // }, false)
 })
 const initNow = () => {
   $fetch(`${apiUrl}/weather`, { params: { location } })
@@ -179,6 +215,7 @@ const initNow = () => {
       loading.value = false
       if (!res.success) return
       state.weathers = [res.data]
+      initSkycons(state.weathers[0].now.text)
     })
 }
 const initData = () => {
@@ -213,7 +250,7 @@ defineOptions({
 .weather-component {
     font-size: 12px;
     width: 180px;
-    height: 180px;
+    height: 160px;
     display: flex;
     position: fixed;
     z-index: 10;
@@ -366,16 +403,17 @@ defineOptions({
 .panels {
      .weather {
         font-size: 40px;
+        height: 90px;
         // margin: 10px 0;
     }
     .wind {
         font-size: 16px;
         margin-top: 10px;
     }
-    .temperature,
-    .last_update {
-        margin-top: 10px;
-    }
+    // .temperature,
+    // .last_update {
+    //     margin-top: 10px;
+    // }
 }
 .close {
     position: absolute;

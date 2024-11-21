@@ -13,17 +13,17 @@
     <template #default>
       <div>
         <nuxt-link :to="`/list/${data.id}`">
-          <div class="flex mb-[--gap] bg-white rounded-md overflow-hidden shadow-xl dark:bg-black dark:border dark:border-[#333] bg-white">
-            <el-image :src="data.imgUrl || data.content?getImgUrl(data.content):''" fit="cover" class="w-[140px] h-[100px] md:w-[240px] md:h-[160px]" />
-            <div class="flex-1 ml-[--gap] p-4">
-              <div class="title line-clamp-1 mb-[--gap]">
+          <div class="flex mb-[--gap] rounded-md overflow-hidden shadow-xl dark:bg-black border border-[--el-border-color]">
+            <el-image :src="data.imgUrl || data.content?getImgUrl(data.content):''" fit="cover" class="w-[120px] h-[115px] md:w-[240px] md:h-[160px]" />
+            <div class="flex-1 ml-[--gap] p-4 max-w-[60%] md:max-w-[73%] md:max-h-[160px]">
+              <div class="title line-clamp-1 text-[16px] mb-[--gap]">
                 {{ data.title }}
               </div>
-              <div v-if="data.content" class="desc line-clamp-2 min-h-[40px] max-w-[100%]" v-html="data.content.replace(getImgUrl(data.content), '')" />
+              <div v-if="data.content" class="desc text-[14px] text-justify text-wrap line-clamp-2 md:line-clamp-4 min-h-[40px]" v-html="data.content.replace(getImgUrl(data.content), '')" />
             </div>
           </div>
         </nuxt-link>
-        </div>
+      </div>
     </template>
   </el-skeleton>
 </template>
