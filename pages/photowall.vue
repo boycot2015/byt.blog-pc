@@ -1,42 +1,52 @@
-<template>
-  <NuxtLayout name="custom">
-    <div v-loading="state.loading" class="photowall about pd20 bgf">
-      <div class="title flexbox-h my-[20px]">
-        照片墙
+div<template>
+  <div
+    v-infinite-scroll="() => loadingMore()"
+    :infinite-scroll-distance="100">
+    <NuxtLayout name="custom">
+      <div
+        v-loading="state.pageLoading"
+        class="photowall about bgf">
+        <div class="title flexbox-h mb-2">
+          照片墙
+        </div>
+        <el-row class="imgs-list clearfix" :style="{ background: `url(${getBgUrl()}) center/cover no-repeat` }">
+          <!-- :class="{bgc: Math.floor((Math.random() * picData.length - 1)) === index}"  -->
+          <el-col
+            v-for="(img, index) in picData"
+            :key="index"
+            :span="12"
+            :md="{ span: 6 }"
+            class="imgs-list-item fl"
+            :class="{ light: getLightStyle(img, index), dark: getDarkStyle(img, index) }"
+          >
+            <div class="img">
+              <el-image
+                fit="cover"
+                preview-teleported
+                append-to-body
+                :initial-index="index"
+                :src="img.url"
+                :preview-src-list="picData.map(el => el.realUrl)"
+                :style="{ ...img.style }"
+                lazy
+                alt=""
+              />
+            </div>
+          </el-col>
+        </el-row>
+        <div v-if="total > state.pageno * state.count" class="more-btn mt-[--gap]" @click="loadingMore">
+          <el-icon v-if="state.loading" class="el-icon-loading mr10">
+            <Loading />
+          </el-icon>
+          {{ state.loadingText }}
+        </div>
       </div>
-      <el-row class="imgs-list clearfix" :style="{ background: `url(${getBgUrl()}) center/cover no-repeat` }">
-        <!-- :class="{bgc: Math.floor((Math.random() * picData.length - 1)) === index}"  -->
-        <el-col
-          v-for="(img, index) in picData"
-          :key="index"
-          :span="12"
-          :md="{ span: 6 }"
-          class="imgs-list-item fl"
-          :class="{ light: getLightStyle(img, index), dark: getDarkStyle(img, index) }"
-        >
-          <div class="img">
-            <el-image
-              fit="cover"
-              append-to-body
-              :initial-index="index"
-              :src="img.url"
-              :preview-src-list="[img.realUrl]"
-              :style="{ ...img.style }"
-              lazy
-              alt=""
-            />
-          </div>
-        </el-col>
-      </el-row>
-      <div v-if="total > picData.length" class="more-btn" @click="loadingMore">
-        <i v-if="state.loadingText === '加载中...'" class="el-icon-loading mr10" />
-        {{ loadingText }}
-      </div>
-    </div>
-  </NuxtLayout>
+    </NuxtLayout>
+  </div>
 </template>
 
 <script setup>
+import { Loading } from '@element-plus/icons-vue'
 import { actions } from '@/utils/theme'
 
 const { loadingMore: getMore, getData } = actions
@@ -48,9 +58,10 @@ const picData = ref([])
 const state = reactive({
   pageno: 1,
   loadingText: '点击或下拉加载更多 >',
-  cateIndex: 0,
-  loading: true,
-  count: 0,
+  cateIndex: 'default',
+  loading: false,
+  pageLoading: true,
+  count: 20,
 })
 const total = ref(0)
 const getDarkStyle = (row) => {
@@ -66,20 +77,27 @@ const getBgUrl = () => {
 getData({ pageno: 1, count: 16 }).then((res) => {
   total.value = res.data.total
   picData.value = res.data.picData || []
-  state.loading = false
+  state.pageLoading = false
 })
 const loadingMore = () => {
-  state.pageno++
   state.loadingText = '加载中...'
+  if (state.loading) return
+  state.pageno++
+  state.loading = true
   getMore({
     old_id: state.cateIndex,
-    category: state.cateIndex || 'unsplash',
+    category: state.cateIndex,
     pageno: state.pageno,
     count: state.count,
   }).then((res) => {
     total.value = res.data.total
-    picData.value = res.data.list || []
-    state.loadingText = '点击或下拉加载更多 >'
+    picData.value = res.data.picData || []
+    // console.log(res.data, 'state.picData')
+    state.pageLoading = false
+    setTimeout(() => {
+      state.loading = false
+      state.loadingText = '点击或下拉加载更多 >'
+    }, 200)
   })
 }
 useHead({ title: '照片墙' })
@@ -156,7 +174,6 @@ definePageMeta({
     .more-btn {
         text-align: center;
         line-height: 32px;
-        color: $white;
         &:hover {
             color: $primary;
             cursor: pointer;

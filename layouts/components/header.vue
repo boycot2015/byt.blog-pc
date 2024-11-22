@@ -1,7 +1,7 @@
 <template>
   <div class="text-center leading-[60px] w-full border-b border-[--el-border-color]">
     <div class="lg:max-w-[1200px] mx-[auto] flex items-center">
-      <el-image class="h-[40px] rounded-md" :src="appConfig.logo" />
+      <el-image class="h-[40px] hidden md:block rounded-md" :src="appConfig.logo" />
       <el-tabs v-model="activeTab" class="lg:max-w-[1200px] mx-[auto]" @tab-click="onTabClick">
         <el-tab-pane
           v-for="nav in appConfig.navList.filter(el => !el.meta?.hideInNav)"

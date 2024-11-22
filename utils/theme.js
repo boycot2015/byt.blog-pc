@@ -2,8 +2,8 @@ import { reactive } from 'vue'
 import { apiUrl } from '~/api/baseUrl'
 
 const wallpaper = {
-  queryByPage() {
-    return $fetch(apiUrl + '/wallpaper')
+  queryByPage(params) {
+    return $fetch(apiUrl + '/wallpaper', { params })
   },
   getCategory() {},
 
@@ -35,11 +35,11 @@ const setData = (data) => {
     }
   }
 }
-const setMoreData = (state, data) => {
+const setMoreData = (data) => {
   state.picData = [...state.picData, ...data.picData]
   state.picData = setPicUrl(state.picData)
-  // console.log(state.picData, 'state.picData')
   state.total = data.total
+  return Promise.resolve({ code: 200, data: state, success: true })
 }
 export const actions = {
   async getData(params) {
@@ -101,7 +101,7 @@ export const actions = {
     return Promise.resolve({ code: 200, data: state, success: true })
   },
   async loadingMore(params) {
-    const state = {}
+    const data = {}
     let newestList = await wallpaper.queryByPage({
       ...params,
       page: params.pageno,
@@ -109,9 +109,8 @@ export const actions = {
     })
     let list = newestList.data.list
     list = list.map(el => ({ ...el, url: el.thumb_img || el.img || el.url }))
-    state.picData = [...list]
-    state.total = newestList.data.total_count
-    setMoreData(state)
-    return Promise.resolve({ code: 200, data: state, success: true })
+    data.picData = [...list]
+    data.total = newestList.data.total_count
+    return setMoreData(data)
   },
 }
