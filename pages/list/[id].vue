@@ -30,16 +30,22 @@ definePageMeta({
         <h3 class="self-start flex-2 mb-[--gap]">
           {{ indexData.title }}
         </h3>
-        <div class="tags flex-1 mb-[--gap]">
-          <span class="category flex-1 mr-[--gap]">{{ indexData.category?.value || '--' }}</span>
-          <el-tag class="tag  mr-[--gap]" v-for="tag in indexData.tags" :key="tag.value">{{ tag.value }}</el-tag>
+        <div class="tags flex-1 flex flex-col md:flex-row justify-between mb-[--gap]">
+          <div class="mr-[--gap] mb-[--gap] md:mb-0 flex justify-between">
+            分类：<span class="category mr-[--gap]">{{ indexData.category?.value || '--' }}</span>
+            <span class="time flex-1 md:hidden text-right">{{ new Date(indexData.updateTime).toLocaleString() }}</span>
+          </div>
+          <div class="flex-1">
+            标签：<el-tag v-for="tag in indexData.tags" :key="tag.value" class="tag  mr-[--gap]">
+              {{ tag.value }}
+            </el-tag>
+          </div>
+          <span class="time flex-1 hidden md:block text-right">{{ new Date(indexData.updateTime).toLocaleString() }}</span>
         </div>
-        <span class="time flex-1">{{ new Date(indexData.updateTime).toLocaleString() }}</span>
       </div>
       <client-only>
-        <p class="text-left" v-html="indexData.content" />
+        <p class="text-left content text-justify" v-html="indexData.content" />
       </client-only>
-      <!-- <p>{{ indexData.content }}</p> -->
     </NuxtLayout>
   </div>
 </template>
@@ -64,5 +70,11 @@ a {
 }
 a:hover {
   text-decoration: underline;
+}
+:deep(.content) {
+  img {
+    max-width: 100% !important;
+    margin: 10px auto !important;
+  }
 }
 </style>

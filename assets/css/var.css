@@ -1,9 +1,11 @@
 :root {
     --main-bg: #f0f2f5;
     --color-primary: #2dd4bf;
-    --border-color: #eee;
+    --border-color: #e8e8e8;
     --text-color: #333;
-    --text-color-666: hsl(0, 0%, 40%);
+    --text-color-333: #333;
+    --text-color-666: #666;
+    --text-color-999: #999;
     --text-color-ccc: #ccc;
     --text-color-white: white;
     --gap: 15px;

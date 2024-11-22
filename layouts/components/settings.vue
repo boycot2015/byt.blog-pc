@@ -1,5 +1,5 @@
 <template>
-  <el-drawer v-model="drawer" :size="300">
+  <el-drawer v-model="drawer" title="" :size="300">
     <aside>settings</aside>
   </el-drawer>
 </template>

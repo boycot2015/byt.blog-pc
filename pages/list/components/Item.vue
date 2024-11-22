@@ -13,9 +13,13 @@
     <template #default>
       <div>
         <nuxt-link :to="`/list/${data.id}`">
-          <div class="flex mb-[--gap] rounded-md overflow-hidden shadow-xl dark:bg-black border border-[--el-border-color]">
-            <el-image :src="data.imgUrl || data.content?getImgUrl(data.content):''" fit="cover" class="w-[120px] h-[115px] md:w-[240px] md:h-[160px]" />
-            <div class="flex-1 ml-[--gap] p-4 max-w-[60%] md:max-w-[73%] md:max-h-[160px]">
+          <div class="flex mb-[--gap] rounded-md overflow-hidden transition-all translate-y-[-5px] hover:drop-shadow-xl shadow-xl dark:bg-black border border-[--el-border-color]">
+            <el-image
+              :class="{ order: index % 2 === 0 ? 2 : 1 }"
+              :src="data.imgUrl || data.content?getImgUrl(data.content):''"
+              fit="cover"
+              class="w-[120px] h-[115px] md:w-[240px] md:h-[160px]" />
+            <div class="flex-1 ml-[--gap] p-4 max-w-[60%] md:max-w-[73%] md:max-h-[160px]" :class="{ order: index % 2 === 0 ? 1 : 2 }">
               <div class="title line-clamp-1 text-[16px] mb-[--gap]">
                 {{ data.title }}
               </div>
@@ -39,6 +43,10 @@ defineProps({
   loading: {
     type: Boolean,
     default: true,
+  },
+  index: {
+    type: Number,
+    default: 0,
   },
 })
 </script>

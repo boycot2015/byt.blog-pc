@@ -2,6 +2,8 @@
   <div @click="toggleTheme">
     <el-switch
       v-model="showDark"
+      active-color="var(--el-fill-color-dark)"
+      inactive-color="var(--el-color-primary)"
       :active-action-icon="Moon"
       :inactive-action-icon="Sunny"
     />

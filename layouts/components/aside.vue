@@ -23,9 +23,11 @@
             <div>
               <span>分类</span><span>({{ cateCount }})</span>
             </div>
-            <el-tooltip content="更多">
-              <span class="cursor-pointer" @click="$router.push('/list')"><el-icon><More /></el-icon></span>
-            </el-tooltip>
+            <client-only>
+              <el-tooltip content="更多">
+                <span class="cursor-pointer" @click="$router.push('/list')"><el-icon><More /></el-icon></span>
+              </el-tooltip>
+            </client-only>
           </div>
         </template>
         <div class="flex flex-wrap">
@@ -46,9 +48,11 @@
             <div>
               <span>标签</span><span>({{ tagsCount }})</span>
             </div>
-            <el-tooltip content="更多">
-              <span class="cursor-pointer" @click="$router.push('/list')"><el-icon><More /></el-icon></span>
-            </el-tooltip>
+            <client-only>
+              <el-tooltip content="更多">
+                <span class="cursor-pointer" @click="$router.push('/list')"><el-icon><More /></el-icon></span>
+              </el-tooltip>
+            </client-only>
           </div>
         </template>
         <el-tag

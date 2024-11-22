@@ -1,5 +1,6 @@
 export default defineAppConfig({
-  title: 'demo',
+  title: 'blog',
+  logo: '/images/logo.png',
   navList: [
     {
       path: '/',
@@ -12,8 +13,8 @@ export default defineAppConfig({
       },
     },
     {
-      path: '/article',
-      name: 'article',
+      path: '/list',
+      name: 'list',
       meta: {
         title: '列表',
       },
@@ -23,7 +24,7 @@ export default defineAppConfig({
       },
     },
     {
-      path: '/article/view',
+      path: '/article/[id]',
       name: 'articleview',
       meta: {
         title: '列表详情',
@@ -46,6 +47,7 @@ export default defineAppConfig({
       name: 'messageboard',
       meta: {
         title: '留言板',
+        hideInNav: true,
         showBg: true,
         hideAside: true,
       },
@@ -146,7 +148,7 @@ export default defineAppConfig({
       imgUrl: '/images/swagger_logo.jpg',
       url: 'https://blog-api.boycot.top/api-docs/',
       targetType: '_blank',
-      tags: ['nestjs', 'swagger-ui', 'mysql'],
+      tags: ['nestjs', 'mysql'],
       name: '博客后台api文档',
     },
     {

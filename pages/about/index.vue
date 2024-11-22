@@ -18,14 +18,15 @@ const onOpen = (item) => {
 <template>
   <div class="blog-index">
     <NuxtLayout name="custom">
-      <div class="about pd20 md:w-[1000px] mx-[auto] bgf text-left">
+      <div class="about pd20 md:w-[1200px] mx-[auto] bgf text-left">
         <div class="title text-center mb-[--gap]">
           <h3>关于我</h3>
         </div>
         <div class="bg">
           <el-image
             lazy
-            fit="contain"
+            fit="cover"
+            class="img w-full"
             src="/images/about.jpg"
             alt=""
             title="程序猿"
@@ -33,9 +34,7 @@ const onOpen = (item) => {
         </div>
         <div class="content tl">
           <div class="content-section">
-            <p class="desc">
-              {{ websiteConfig.description }}
-            </p>
+            <p class="desc" v-html="websiteConfig.description" />
             <ul class="list">
               <li v-for="item in websiteConfig.list" :key="item.name" class="list-item flex justify-around">
                 <span v-if="item.name" class="name tr">{{ item.name }}:</span>
@@ -70,11 +69,16 @@ const onOpen = (item) => {
                   <template #footer>
                     <div class="flex bottom items-center justify-between">
                       <client-only>
-                        <el-tooltip :content="item.name">
-                          <p class="name line-clamp-1 text-[white] dark:text-[--text-color-333]">{{ item.name }}</p>
+                        <el-tooltip>
+                          <template #content>
+                            <div class="!dark:text-[--text-color-white]">
+                              {{ item.name }}
+                            </div>
+                          </template>
+                          <p class="name line-clamp-1">{{ item.name }}</p>
                         </el-tooltip>
                       </client-only>
-                      <div v-if="item.tags" class="flex items-center">
+                      <div v-if="item.tags" class="md:flex hidden items-center">
                         <el-tag
                           v-for="tag in item.tags"
                           :key="tag"
@@ -157,7 +161,7 @@ const onOpen = (item) => {
               // padding: 10px 5px;
               // border-top: 1px solid $c-ccc;
               .name {
-                  max-width: 100px;
+                  max-width: 120px;
               }
               .el-tag {
                   background-color:var(--primary-color);

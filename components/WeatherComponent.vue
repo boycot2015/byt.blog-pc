@@ -1,28 +1,32 @@
 <template>
-  <div v-show="state.showWeather" v-loading="loading" class="min-h-[145px]">
-    <div
-      v-for="weather in state.weathers"
-      :key="weather.location"
-      class="panels now"
-    >
-      <!-- @click.stop="showDialog"
-      @dblclick.stop="showDialog" -->
-      <div v-if="weather && weather.location" class="location">
-        {{ weather.location.name }}市
+  <div v-loading="loading" class="min-h-[145px]">
+    <div>
+      <div
+        v-for="weather in state.weathers"
+        :key="weather.location"
+        class="panels now"
+        @click.stop="showDialog"
+      >
+        <!-- @click.stop="showDialog"
+        @dblclick.stop="showDialog" -->
+        <div v-if="weather && weather.location" class="location">
+          {{ weather.location.name }}市
+        </div>
+        <div v-if="weather && weather.now" class="weather" :style="{ 'font-size': weather.now.text.length > 3 && '28px' }">
+          <!-- {{ weather.now.text }} -->
+          <el-image class="!bg-[transparent] h-[80px]" :src="'svg/' + icons[weather.now.text] + '.svg'" />
+        </div>
+        <div v-if="weather && weather.now" class="temperature">
+          {{ weather.now.temperature }}℃
+        </div>
       </div>
-      <div v-if="weather && weather.now" class="weather" :style="{ 'font-size': weather.now.text.length > 3 && '28px' }">
-        <!-- {{ weather.now.text }} -->
-        <el-image class="!bg-[transparent] h-[80px]" :src="'svg/' + icons[weather.now.text] + '.svg'" />
-      </div>
-      <div v-if="weather && weather.now" class="temperature">
-        {{ weather.now.temperature }}℃
-      </div>
-      <!-- <div v-if="weather && weather.last_update" class="last_update">
-        {{ new Date(weather.last_update).toLocaleDateString() }}
-      </div> -->
-      <!-- <span class="close" @click.stop="showWeather = false">×</span> -->
     </div>
-    <div ref="dialogRef" class="dialog-content hidden" :class="state.viewMore && 'active'">
+    <el-dialog
+      ref="dialogRef"
+      v-model="state.showWeather"
+      class="dialog-content"
+      :class="state.viewMore && 'active'"
+    >
       <div class="dialog-main">
         <div class="top">
           <div class="panels location">
@@ -30,7 +34,8 @@
               {{ state.weathers[0].location.name }}市
             </div>
             <div v-if="state.weathers[0] && state.weathers[0].now" class="weather" :style="{ 'font-size': state.weathers[0].now.text.length > 5 && '34px' }">
-              {{ state.weathers[0].now.text }}
+              <!-- {{ state.weathers[0].now.text }} -->
+              <el-image class="!bg-[transparent] h-[80px]" :src="'svg/' + icons[state.weathers[0].now.text] + '.svg'" />
             </div>
             <div v-if="state.weathers[0] && state.weathers[0].now" class="temperature">
               {{ state.weathers[0].now.temperature }}℃
@@ -62,7 +67,8 @@
               @dblclick="showDialog"
             >
               <div v-if="weather && weather.text_day" class="weather" :style="{ 'font-size': weather.text_day.length > 3 && '28px' }">
-                {{ weather.text_day }}
+                <!-- {{ weather.text_day }} -->
+                <el-image class="!bg-[transparent] h-[80px]" :src="'svg/' + icons[weather.text_day] + '.svg'" />
               </div>
               <div v-if="weather && weather.high" class="temperature">
                 {{ weather.low }}~{{ weather.high }}℃
@@ -77,7 +83,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </el-dialog>
     <!-- <div class="add-city" @click="addCity()">+</div> -->
   </div>
 </template>
@@ -89,46 +95,16 @@
 // import axios from '@/api/axios'
 import { apiUrl } from '@/api/baseUrl'
 
-const icons = ref({
-  阴: 'cloud',
-  小雨: 'rain',
-  晴: 'sunny',
-  多云: 'cloudy',
+const appConfig = useAppConfig()
+const icons = ref({})
+appConfig.weatherIcons.map((el) => {
+  icons.value[el.name] = el.value
 })
-const initSkycons = (text) => {
-  const icons = {
-    阴: 'PARTLY_CLOUDY_DAY',
-    小雨: 'RAIN',
-  }
-
-  const skycons = new window.Skycons({ color: 'black' })
-  // on Android, a nasty hack is needed: {"resizeClear": true}
-
-  // you can add a canvas by it's ID...
-  skycons.add('weather-icon', window.Skycons[icons[text]])
-
-  // ...or by the canvas DOM element itself.
-  // skycons.add(document.getElementById('icon2'), Skycons.RAIN)
-
-  // if you're using the Forecast API, you can also supply
-  // strings: "partly-cloudy-day" or "rain".
-
-  // start animation!
-  skycons.play()
-
-  // you can also halt animation with skycons.pause()
-
-  // want to change the icon? no problem:
-  skycons.set('weather-icon', window.Skycons[icons[text]])
-
-  // want to remove one altogether? no problem:
-  // skycons.remove('icon2')
-}
 
 const state = reactive({
   weathers: [],
   dailyWeather: {},
-  showWeather: true,
+  showWeather: false,
   viewMore: false,
   life: {
     location: {
@@ -180,24 +156,7 @@ const loading = ref(true)
 const location = '深圳'
 const showDialog = () => {
   state.viewMore = false
-  state.showWeather = false
-  // MessageBox({
-  //   content: dialogRef.value.innerHTML,
-  //   shadeClose: false,
-  //   title: '',
-  //   drag: true,
-  //   layerStyle: {
-  //     width: '800px',
-  //     height: '500px',
-  //     borderRadius: '15px',
-  //     padding: '20px 0 0 0',
-  //     background: 'rgba(0,0,0,0.8)',
-  //   },
-  //   btns: [
-  //     // { text: '取消', click: () => { $el.close() } },
-  //     // { text: '确认', class: 'btn-primary', click: () => { $el.close() } }
-  //   ],
-  // })
+  state.showWeather = true
 }
 onMounted(() => {
   initData()
@@ -215,7 +174,6 @@ const initNow = () => {
       loading.value = false
       if (!res.success) return
       state.weathers = [res.data]
-      initSkycons(state.weathers[0].now.text)
     })
 }
 const initData = () => {
@@ -355,10 +313,11 @@ defineOptions({
                     font-size: 14px;
                     color: var(--text-color-ccc);
                     border-bottom: 0;
+                    padding-top: 5px;
                 }
                 .cont {
                     font-size: 20px;
-                    padding-bottom: 10px;
+                    padding-bottom: 5x;
                     border-bottom: 1px solid var(--border-color);
                 }
             }
@@ -368,7 +327,6 @@ defineOptions({
         font-size: 24px;
         margin: 20px 0;
         text-align: left;
-        color: $white;
         padding-bottom: 10px;
         border-bottom: 1px solid #e8e8e8;
     }

@@ -36,11 +36,11 @@ const getData = ({ page = 1, size = 10 } = {}) => {
 <template>
   <div v-infinite-scroll="() => getData(pageData)" class="blog-list">
     <div
-      v-for="post in indexData[0]"
+      v-for="(post, index) in indexData[0]"
       :key="post.id"
       class="w-[100%] md:w-[960px]"
     >
-      <Item :data="post" :loading="pageLoading" />
+      <Item :data="post" :index="index" :loading="pageLoading" />
     </div>
     <p v-if="loading" class="text-center">
       数据加载中...

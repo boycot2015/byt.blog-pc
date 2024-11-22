@@ -30,10 +30,10 @@ defineOptions({ name: 'Blog' })
     <Banner :data="setting.banner" />
     <div v-if="indexData && indexData.newLeast" class="mt-[15px] w-[100%]">
       <div
-        v-for="post in indexData.newLeast"
+        v-for="(post, index) in indexData.newLeast"
         :key="post.id"
       >
-        <Item :data="post" :loading="pageLoading" />
+        <Item :data="post" :index="index" :loading="pageLoading" />
       </div>
     </div>
   </div>
