@@ -5,12 +5,11 @@ div<template>
     <NuxtLayout name="custom">
       <div
         v-loading="state.pageLoading"
-        class="photowall about bgf">
-        <div class="title flexbox-h mb-2">
+        class="photowall about md:pt-5">
+        <div class="title flexbox-h mb-5">
           照片墙
         </div>
         <el-row class="imgs-list clearfix" :style="{ background: `url(${getBgUrl()}) center/cover no-repeat` }">
-          <!-- :class="{bgc: Math.floor((Math.random() * picData.length - 1)) === index}"  -->
           <el-col
             v-for="(img, index) in picData"
             :key="index"

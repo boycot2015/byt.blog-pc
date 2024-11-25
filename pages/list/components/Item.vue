@@ -11,8 +11,8 @@
       </div>
     </template>
     <template #default>
-      <div>
-        <nuxt-link :to="`/list/${data.id}`">
+      <Transition name="slide-fade">
+        <nuxt-link v-if="!loading" :to="`/list/${data.id}`">
           <div class="flex mb-[--gap] rounded-md overflow-hidden transition-all translate-y-[-5px] hover:drop-shadow-xl shadow-xl dark:bg-black border border-[--el-border-color]">
             <el-image
               :class="{ order: index % 2 === 0 ? 2 : 1 }"
@@ -27,7 +27,7 @@
             </div>
           </div>
         </nuxt-link>
-      </div>
+      </Transition>
     </template>
   </el-skeleton>
 </template>
@@ -50,3 +50,19 @@ defineProps({
   },
 })
 </script>
+
+<style lang="scss">
+.slide-fade-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
+}
+</style>

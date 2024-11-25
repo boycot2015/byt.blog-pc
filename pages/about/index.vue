@@ -63,8 +63,12 @@ const onOpen = (item) => {
                 @click="onOpen(item)"
               >
                 <el-card body-class="!p-0">
-                  <div class="img overflow-hidden m-[auto] text-center" :style="{ background: `url(${item.imgUrl}) center/cover no-repeat` }">
-                    <el-image :src="item.imgUrl" alt="" class="!border-none" />
+                  <div class="img overflow-hidden m-[auto] text-center">
+                    <el-image
+                      :src="item.imgUrl"
+                      fit="cover"
+                      alt=""
+                      class="!border-none h-full md:h-[auto]" />
                   </div>
                   <template #footer>
                     <div class="flex bottom items-center justify-between">

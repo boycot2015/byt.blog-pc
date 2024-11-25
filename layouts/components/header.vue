@@ -1,16 +1,13 @@
 <template>
   <div class="text-center leading-[60px] w-full border-b border-[--el-border-color]">
-    <div class="lg:max-w-[1200px] mx-[auto] flex items-center">
-      <el-image class="h-[40px] hidden md:block rounded-md" :src="appConfig.logo" />
+    <div class="lg:max-w-[1200px] mx-[auto] px-[--gap] md:px-0 flex items-center">
+      <el-image class="h-[40px] rounded-md" :src="appConfig.logo" />
       <el-tabs v-model="activeTab" class="lg:max-w-[1200px] mx-[auto]" @tab-click="onTabClick">
         <el-tab-pane
           v-for="nav in appConfig.navList.filter(el => !el.meta?.hideInNav)"
           :key="nav.name"
           :name="nav.name"
           :label="nav.meta.title" />
-        <!-- <el-tab-pane name="list" label="列表" />
-        <el-tab-pane name="about" label="关于" />
-        <el-tab-pane name="demo" label="demo" /> -->
       </el-tabs>
       <div class="hidden md:flex items-center">
         <Dark />

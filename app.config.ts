@@ -80,6 +80,7 @@ export default defineAppConfig({
       name: 'classes',
       meta: {
         title: '时间轴',
+        hideInNav: true,
       },
       query: {
       },
