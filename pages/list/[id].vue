@@ -44,7 +44,7 @@ definePageMeta({
         </div>
       </div>
       <client-only>
-        <p class="text-left content text-justify" v-html="indexData.content" />
+        <p class="text-left content text-justify min-h-[100vh]" v-html="indexData.content" />
       </client-only>
     </NuxtLayout>
   </div>

@@ -1,10 +1,70 @@
 <template>
-  <el-drawer v-model="drawer" title="" :size="300">
-    <aside>settings</aside>
+  <el-drawer v-model="drawer" title="设置" :size="300">
+    <el-form
+      v-infinite-scroll="loadingMore"
+      :infinite-scroll-distance="10"
+      class="text-left">
+      <el-tabs v-model="activeTab">
+        <el-tab-pane name="theme" label="主题">
+          <el-form-item label="主题色:">
+            <el-color-picker v-model="appConfig.theme.colors.primary" @change="onColorChange" />
+          </el-form-item>
+          <el-form-item label-position="top">
+            <div class="w-full">
+              <div class="flex w-full justify-between items-center text-[--text-color-666]">
+                <h3>在线壁纸</h3>
+                <el-icon size="20" title="刷新" class="cursor-pointer">
+                  <Refresh @click="onRefresh" />
+                </el-icon>
+              </div>
+              <div v-loading="state.pageLoading" class="min-h-[100vh]">
+                <el-row :gutter="10">
+                  <el-col v-for="item in picData" :key="item.url" :span="12">
+                    <el-image
+                      lazy
+                      :src="item.url"
+                      class="cursor-pointer rounded-md"
+                      @click="setBg(item)" />
+                  </el-col>
+                  <el-col>
+                    <p v-if="state.loading" class="text-center">
+                      {{ state.loadingText }}
+                    </p>
+                  </el-col>
+                </el-row>
+              </div>
+            </div>
+          </el-form-item>
+        </el-tab-pane>
+        <el-tab-pane name="base" label="基础配置">
+          <el-form-item
+            v-for="(item, key) in appConfig"
+            v-show="appConfig[key] && typeof item !== 'object'"
+            :key="key"
+            :label="(labels[key]||key) + ':'">
+            <el-input v-model="appConfig[key]" />
+          </el-form-item>
+        </el-tab-pane>
+      </el-tabs>
+    </el-form>
+    <el-backtop target=".el-drawer__body" />
   </el-drawer>
 </template>
 
-<script setup lang="ts">
+<script setup>
+import { Refresh } from '@element-plus/icons-vue'
+import { actions } from '@/utils/theme'
+
+const activeTab = ref('theme')
+const labels = {
+  title: '标题',
+  author: '作者',
+  copyrightTime: '时间',
+  copyright: '版权',
+  email: '邮箱',
+  github: 'github',
+}
+const appConfig = useAppConfig()
 const props = defineProps({
   visible: {
     type: Boolean,
@@ -12,4 +72,71 @@ const props = defineProps({
   },
 })
 const drawer = ref(props.visible)
+
+const { loadingMore: getMore, getData } = actions
+
+const picData = ref([])
+const state = reactive({
+  pageno: 1,
+  loadingText: '点击或下拉加载更多 >',
+  cateIndex: 'default',
+  loading: false,
+  pageLoading: true,
+  count: 10,
+})
+const total = ref(0)
+
+getData({ pageno: 1, count: 10 }).then((res) => {
+  total.value = res.data.total
+  picData.value = res.data.picData || []
+  state.pageLoading = false
+})
+const setBg = (item) => {
+  document.body.style.background = `url(${item.url}) no-repeat center/cover fixed`
+}
+const onRefresh = () => {
+  state.pageLoading = true
+  picData.value = []
+  getData({ pageno: 1, count: 10 }).then((res) => {
+    total.value = res.data.total
+    picData.value = res.data.picData || []
+    state.pageLoading = false
+  })
+}
+const onColorChange = (color) => {
+  document.querySelector(':root').style.setProperty('--color-primary', color)
+}
+const loadingMore = () => {
+  state.loadingText = '加载中...'
+  if (state.loading) return
+  state.pageno++
+  state.loading = true
+  getMore({
+    old_id: state.cateIndex,
+    category: state.cateIndex,
+    pageno: state.pageno,
+    count: state.count,
+  }).then((res) => {
+    total.value = res.data.total
+    picData.value = res.data.picData || []
+    // console.log(res.data, 'state.picData')
+    state.pageLoading = false
+    setTimeout(() => {
+      state.loading = false
+      state.loadingText = '点击或下拉加载更多 >'
+    }, 1000)
+  })
+}
 </script>
+
+<style lang="scss" scoped>
+:deep(.el-form-item) {
+  margin-bottom: 10px;
+}
+</style>
+
+<style lang="scss">
+ .el-drawer__body {
+  padding-right: 10px;
+}
+</style>

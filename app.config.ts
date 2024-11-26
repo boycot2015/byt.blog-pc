@@ -1,6 +1,9 @@
 export default defineAppConfig({
   title: 'blog',
   logo: '/images/logo.png',
+  author: 'Boycot',
+  copyrightTime: new Date().getFullYear(),
+  copyright: 'Copyright © Boycot',
   navList: [
     {
       path: '/',

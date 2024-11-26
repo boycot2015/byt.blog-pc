@@ -45,3 +45,9 @@ html.dark::view-transition-old(root) {
 html.dark::view-transition-new(root) {
   z-index: 1;
 }
+.el-drawer__header {
+  padding-bottom: 10px;
+  margin-bottom: 0;
+  line-height: 1;
+  border-bottom: 1px solid var(--el-border-color);
+}

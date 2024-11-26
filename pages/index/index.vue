@@ -4,6 +4,7 @@ import Item from '../list/components/Item.vue'
 import Banner from './components/Banner.vue'
 
 const pageLoading = ref(true)
+// const { indexData, setting } = useAppData()
 const { public: config } = useRuntimeConfig()
 const { status, data } = await useAsyncData('index-data', async () => {
   const [indexRes, settingRes] = await Promise.all([
@@ -23,6 +24,7 @@ const setting = ref({
 // console.log(indexData, 'indexData')
 // console.log(setting.value, 'setting')
 defineOptions({ name: 'Blog' })
+useSeoMeta({ title: '首页', description: setting.value?.siteConfig?.gitHub })
 </script>
 
 <template>

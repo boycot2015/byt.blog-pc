@@ -7,4 +7,5 @@ export default withNuxt(
   'vue/max-attributes-per-line': ['warn', { singleline: 3 }],
   'vue/no-v-html': 'off',
   'vue/html-closing-bracket-newline': 'off',
+  '@typescript-eslint/no-explicit-any': 'off',
 })

@@ -2,13 +2,22 @@
   <NuxtRouteAnnouncer />
   <NuxtLoadingIndicator />
   <NuxtLayout>
-    <!-- <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0,  maximum-scale=1.0,minimum-scale=1.0"> -->
     <NuxtPage />
   </NuxtLayout>
 </template>
 
-<script setup lang="ts">
-useSeoMeta({ title: 'Home', description: 'Welcome to the Nuxt 3 starter template' })
+<script setup>
+// const pageLoading = ref(true)
+// const { public: config } = useRuntimeConfig()
+// const data = await $fetch(config.apiBase + '/datas')
+// const setting = await $fetch(config.apiBase + '/setting/get')
+// useAppData({ data, setting })
+// onMounted(() => { // 必须在onMounted的时候才能用local和window
+//   getLocal()
+//   window.onbeforeunload = () => { // 离开页面时保存数据，由于可能突发情况，所以重要数据请手动调用setLocal函数
+//     setLocal() // 如果需要调试本地存储数据，记得把这个注释一下
+//   }
+// })
 </script>
 
 <style>
