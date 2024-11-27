@@ -2,7 +2,7 @@
   <div class="dark:bg-black min-h-[100vh] w-full">
     <Header />
     <div class="w-full max-w-[1200px] mx-[auto] my-[20px] flex flex-col md:flex-row justify-between">
-      <main class="min-h-[100vh] dark:text-white p-[--gap] md:p-0">
+      <main class="min-h-[300px] dark:text-white p-[--gap] md:p-0">
         <slot />
       </main>
       <Aside class="hidden lg:block w-[220px] ml-[--gap]" />

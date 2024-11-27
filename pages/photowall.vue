@@ -5,7 +5,7 @@ div<template>
     <NuxtLayout name="custom">
       <div
         v-loading="state.pageLoading"
-        class="photowall about md:pt-5">
+        class="photowall about md:pt-5 min-h-[300px]">
         <div class="title flexbox-h mb-5">
           照片墙
         </div>
@@ -33,11 +33,13 @@ div<template>
             </div>
           </el-col>
         </el-row>
-        <div v-if="total > state.pageno * state.count" class="more-btn mt-[--gap]" @click="loadingMore">
-          <el-icon v-if="state.loading" class="el-icon-loading mr10">
-            <Loading />
-          </el-icon>
-          {{ state.loadingText }}
+        <div class="more-btn mt-[--gap]">
+          <div v-if="state.loading" class="flex items-center justify-center">
+            <el-icon class="el-icon-loading mr-2">
+              <Loading />
+            </el-icon>
+            {{ state.loadingText }}
+          </div>
         </div>
       </div>
     </NuxtLayout>
@@ -56,11 +58,11 @@ const getLightStyle = (row) => {
 const picData = ref([])
 const state = reactive({
   pageno: 1,
-  loadingText: '点击或下拉加载更多 >',
+  loadingText: '加载中...',
   cateIndex: 'default',
   loading: false,
   pageLoading: true,
-  count: 20,
+  count: 16,
 })
 const total = ref(0)
 const getDarkStyle = (row) => {
@@ -79,7 +81,6 @@ getData({ pageno: 1, count: 16 }).then((res) => {
   state.pageLoading = false
 })
 const loadingMore = () => {
-  state.loadingText = '加载中...'
   if (state.loading) return
   state.pageno++
   state.loading = true
@@ -95,7 +96,6 @@ const loadingMore = () => {
     state.pageLoading = false
     setTimeout(() => {
       state.loading = false
-      state.loadingText = '点击或下拉加载更多 >'
     }, 200)
   })
 }

@@ -27,7 +27,10 @@
                       @click="setBg(item)" />
                   </el-col>
                   <el-col>
-                    <p v-if="state.loading" class="text-center">
+                    <p v-if="state.loading" class="text-center flex items-center justify-center">
+                      <el-icon class="el-icon-loading mr-2">
+                        <Loading />
+                      </el-icon>
                       {{ state.loadingText }}
                     </p>
                   </el-col>
@@ -52,7 +55,7 @@
 </template>
 
 <script setup>
-import { Refresh } from '@element-plus/icons-vue'
+import { Refresh, Loading } from '@element-plus/icons-vue'
 import { actions } from '@/utils/theme'
 
 const activeTab = ref('theme')

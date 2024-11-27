@@ -4,6 +4,8 @@ export default defineAppConfig({
   author: 'Boycot',
   copyrightTime: new Date().getFullYear(),
   copyright: 'Copyright © Boycot',
+  beian: '粤ICP备18002072号',
+  policeImg: '/images/icon-police.png',
   navList: [
     {
       path: '/',

@@ -11,7 +11,7 @@ const pageData = ref({
   total: 0,
 })
 const { public: config } = useRuntimeConfig()
-const { status, data } = await useFetch(config.apiBase + '/article')
+const { status, data } = await useFetch(config.apiBase + '/article/list')
 onMounted(() => {
   pageLoading.value = status.value === 'pending'
 })
