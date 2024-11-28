@@ -8,16 +8,11 @@
 
 <script setup>
 // const pageLoading = ref(true)
-// const { public: config } = useRuntimeConfig()
-// const data = await $fetch(config.apiBase + '/datas')
-// const setting = await $fetch(config.apiBase + '/setting/get')
-// useAppData({ data, setting })
-// onMounted(() => { // 必须在onMounted的时候才能用local和window
-//   getLocal()
-//   window.onbeforeunload = () => { // 离开页面时保存数据，由于可能突发情况，所以重要数据请手动调用setLocal函数
-//     setLocal() // 如果需要调试本地存储数据，记得把这个注释一下
-//   }
-// })
+onMounted(() => { // 必须在onMounted的时候才能用local和window
+  window.onbeforeunload = () => { // 离开页面时保存数据，由于可能突发情况，所以重要数据请手动调用setLocal函数
+    setLocal('appdata', useAppConfig) // 如果需要调试本地存储数据，记得把这个注释一下
+  }
+})
 </script>
 
 <style>

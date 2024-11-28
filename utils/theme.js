@@ -113,4 +113,7 @@ export const actions = {
     data.total = newestList.data.total_count
     return setMoreData(data)
   },
+  setWallpaper(item) {
+    document.body.style.background = `url(${item.url}) no-repeat center/cover fixed`
+  },
 }

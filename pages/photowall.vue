@@ -9,7 +9,7 @@ div<template>
         <div class="title flexbox-h mb-5">
           照片墙
         </div>
-        <el-row class="imgs-list clearfix" :style="{ background: `url(${getBgUrl()}) center/cover no-repeat` }">
+        <el-row class="imgs-list rounded-md overflow-hidden" :style="{ background: `url(${getBgUrl()}) center/cover no-repeat` }">
           <el-col
             v-for="(img, index) in picData"
             :key="index"
@@ -30,6 +30,14 @@ div<template>
                 lazy
                 alt=""
               />
+            </div>
+            <div class="action absolute w-full flex bottom-0 z-[999]">
+              <el-button class="flex-1 rounded-none border-l-0 mr-0" @click="onAction(img, 1)">
+                设置为壁纸
+              </el-button>
+              <el-button class="flex-1 rounded-none border-x-0 !ml-0" @click="onAction(img, 2)">
+                查看大图
+              </el-button>
             </div>
           </el-col>
         </el-row>
@@ -74,6 +82,18 @@ const getBgUrl = () => {
   if (!len) return ''
   const url = picData.value[Math.floor(Math.random() * len)].realUrl
   return url || picData.value[0] || picData.value[0].url || ''
+}
+const onAction = (row, type) => {
+  switch (type) {
+    case 1:
+      actions.setWallpaper(row)
+      break
+    case 2:
+      window.open(row.url)
+      break
+    default:
+      break
+  }
 }
 getData({ pageno: 1, count: 16 }).then((res) => {
   total.value = res.data.total

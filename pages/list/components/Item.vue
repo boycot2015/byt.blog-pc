@@ -13,13 +13,13 @@
     <template #default>
       <Transition name="slide-fade">
         <nuxt-link v-if="!loading" :to="`/list/${data.id}`">
-          <div class="flex mb-[--gap] rounded-md overflow-hidden transition-all translate-y-[-5px] hover:drop-shadow-xl shadow-xl dark:bg-black border border-[--el-border-color]">
+          <div class="flex mb-[--gap] rounded-md overflow-hidden transition-all translate-y-[-5px] hover:drop-shadow-xl shadow-xl dark:bg-black border border-[--el-border-color] justify-between">
             <el-image
-              :class="{ order: index % 2 === 0 ? 2 : 1 }"
+              :style="{ order: index % 2 === 0 ? 1 : 2 }"
               :src="data.img || data.imgUrl || (data.content?getImgUrl(data.content):'')"
               fit="cover"
               class="w-[120px] h-[115px] md:w-[240px] md:h-[160px]" />
-            <div class="flex-1 ml-[--gap] p-4 max-w-[60%] md:max-w-[73%] md:max-h-[160px]" :class="{ order: index % 2 === 0 ? 1 : 2 }">
+            <div class="flex-1 ml-[--gap] p-4 max-w-[60%] md:max-w-[73%] md:max-h-[160px]" :style="{ order: index % 2 === 0 ? 2 : 1 }">
               <div class="title line-clamp-1 text-[16px] mb-[--gap]">
                 {{ data.title }}
               </div>

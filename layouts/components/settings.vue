@@ -4,51 +4,55 @@
       v-infinite-scroll="loadingMore"
       :infinite-scroll-distance="10"
       class="text-left">
-      <el-tabs v-model="activeTab">
-        <el-tab-pane name="theme" label="主题">
-          <el-form-item label="主题色:">
-            <el-color-picker v-model="appConfig.theme.colors.primary" @change="onColorChange" />
-          </el-form-item>
-          <el-form-item label-position="top">
-            <div class="w-full">
-              <div class="flex w-full justify-between items-center text-[--text-color-666]">
-                <h3>在线壁纸</h3>
+      <!-- <el-tabs v-model="activeTab">
+        <el-tab-pane name="theme" label="主题" />
+        <el-tab-pane name="base" label="基础配置" />
+      </el-tabs> -->
+      <template v-if="activeTab === 'theme'">
+        <el-form-item label="主题色:">
+          <el-color-picker v-model="appConfig.theme.colors.primary" @change="onColorChange" />
+        </el-form-item>
+        <el-form-item label-position="top">
+          <div class="w-full">
+            <div fill class="flex w-full justify-between items-center mb-2">
+              <el-text>在线壁纸</el-text>
+              <el-text>
                 <el-icon size="20" title="刷新" class="cursor-pointer">
                   <Refresh @click="onRefresh" />
                 </el-icon>
-              </div>
-              <div v-loading="state.pageLoading" class="min-h-[100vh]">
-                <el-row :gutter="10">
-                  <el-col v-for="item in picData" :key="item.url" :span="12">
-                    <el-image
-                      lazy
-                      :src="item.url"
-                      class="cursor-pointer rounded-md"
-                      @click="setBg(item)" />
-                  </el-col>
-                  <el-col>
-                    <p v-if="state.loading" class="text-center flex items-center justify-center">
-                      <el-icon class="el-icon-loading mr-2">
-                        <Loading />
-                      </el-icon>
-                      {{ state.loadingText }}
-                    </p>
-                  </el-col>
-                </el-row>
-              </div>
+              </el-text>
             </div>
-          </el-form-item>
-        </el-tab-pane>
-        <el-tab-pane name="base" label="基础配置">
-          <el-form-item
-            v-for="(item, key) in appConfig"
-            v-show="appConfig[key] && typeof item !== 'object'"
-            :key="key"
-            :label="(labels[key]||key) + ':'">
-            <el-input v-model="appConfig[key]" />
-          </el-form-item>
-        </el-tab-pane>
-      </el-tabs>
+            <div v-loading="state.pageLoading" class="min-h-[100vh]">
+              <el-row :gutter="10">
+                <el-col v-for="item in picData" :key="item.url" :span="12">
+                  <el-image
+                    lazy
+                    :src="item.url"
+                    class="cursor-pointer rounded-md"
+                    @click="setBg(item)" />
+                </el-col>
+                <el-col>
+                  <p v-if="state.loading" class="text-center flex items-center justify-center">
+                    <el-icon class="el-icon-loading mr-2">
+                      <Loading />
+                    </el-icon>
+                    {{ state.loadingText }}
+                  </p>
+                </el-col>
+              </el-row>
+            </div>
+          </div>
+        </el-form-item>
+      </template>
+      <template v-if="activeTab === 'base'">
+        <el-form-item
+          v-for="(item, key) in labels"
+          v-show="appConfig[key]"
+          :key="key"
+          :label="(labels[key]||key) + ':'">
+          <el-input v-model="appConfig[key]" />
+        </el-form-item>
+      </template>
     </el-form>
     <el-backtop target=".el-drawer__body" />
   </el-drawer>
@@ -66,7 +70,12 @@ const labels = {
   copyright: '版权',
   email: '邮箱',
   github: 'github',
+  beian: '备案',
+  beianUrl: '备案地址',
 }
+const { public: config } = useRuntimeConfig()
+// const data = await $fetch(config.apiBase + '/datas')
+const setting = await $fetch(config.apiBase + '/setting/get')
 const appConfig = useAppConfig()
 const props = defineProps({
   visible: {
@@ -95,7 +104,9 @@ getData({ pageno: 1, count: 10 }).then((res) => {
   state.pageLoading = false
 })
 const setBg = (item) => {
-  document.body.style.background = `url(${item.url}) no-repeat center/cover fixed`
+  item.url = item.bgUrl || item.url
+  appConfig.theme.bgUrl = item.url
+  actions.setWallpaper(item)
 }
 const onRefresh = () => {
   state.pageLoading = true
@@ -130,6 +141,26 @@ const loadingMore = () => {
     }, 1000)
   })
 }
+onMounted(() => {
+  console.log('appConfig', appConfig)
+
+  const data = {
+    ...appConfig,
+    ...setting.data,
+    theme: {
+      colors: {
+        primary: '#409eff',
+      },
+    },
+    ...getLocal('useAppData'),
+    banner: JSON.parse(setting.data?.banner || '[]'),
+    activity: JSON.parse(setting.data?.activity || '{}'),
+    siteConfig: JSON.parse(setting.data?.siteConfig || '{}'),
+  }
+  Object.assign(appConfig, data)
+  onColorChange(data.theme.colors.primary)
+  setBg(data.theme)
+})
 </script>
 
 <style lang="scss" scoped>

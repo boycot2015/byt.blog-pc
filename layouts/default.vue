@@ -1,5 +1,5 @@
 <template>
-  <div class="dark:bg-black min-h-[100vh] w-full">
+  <div class="dark:bg-black min-h-[100vh] w-full pt-[100vh]">
     <Header />
     <div class="w-full max-w-[1200px] mx-[auto] my-[20px] flex flex-col md:flex-row justify-between">
       <main class="min-h-[300px] dark:text-white p-[--gap] md:p-0">

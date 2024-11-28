@@ -4,7 +4,7 @@ import Item from '../list/components/Item.vue'
 import Banner from './components/Banner.vue'
 
 const pageLoading = ref(true)
-// const { indexData, setting } = useAppData()
+const setting = useAppConfig()
 const { public: config } = useRuntimeConfig()
 const { status, data } = await useAsyncData('index-data', async () => {
   const [indexRes, settingRes] = await Promise.all([
@@ -15,12 +15,6 @@ const { status, data } = await useAsyncData('index-data', async () => {
 })
 pageLoading.value = status.value === 'pending'
 const indexData = ref(data.value?.data)
-const setting = ref({
-  banner: JSON.parse(data.value?.setting?.banner || '[]'),
-  activity: JSON.parse(data.value?.setting?.activity || '{}'),
-  siteConfig: JSON.parse(data.value?.setting?.siteConfig || '{}'),
-  theme: JSON.parse(data.value?.setting?.theme || '{}'),
-})
 // console.log(indexData, 'indexData')
 // console.log(setting.value, 'setting')
 defineOptions({ name: 'Blog' })

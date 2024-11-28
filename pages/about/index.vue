@@ -22,11 +22,11 @@ const onOpen = (item) => {
         <div class="title text-center mb-[--gap]">
           <h3>关于我</h3>
         </div>
-        <div class="bg">
+        <div class="bg-[#006263] rounded-md m-[auto] mb-3">
           <el-image
             lazy
             fit="cover"
-            class="img w-full"
+            class="img w-[75%] block m-[auto]"
             src="/images/about.jpg"
             alt=""
             title="程序猿"
