@@ -1,8 +1,14 @@
 <template>
-  <div class="dark:bg-black min-h-[100vh] w-full pt-[100vh]">
+  <div class="dark:bg-black min-h-[100vh] w-full">
     <Header />
+    <template v-if="$route.path=='/'">
+      <Cover />
+      <div class="max-w-[1200px] mx-[auto]">
+        <Cate />
+      </div>
+    </template>
     <div class="w-full max-w-[1200px] mx-[auto] my-[20px] flex flex-col md:flex-row justify-between">
-      <main class="min-h-[300px] dark:text-white p-[--gap] md:p-0">
+      <main class="min-h-[300px] w-full dark:text-white p-[--gap] md:p-0">
         <slot />
       </main>
       <Aside class="hidden lg:block w-[220px] ml-[--gap]" />
@@ -13,9 +19,11 @@
 </template>
 
 <script setup lang="ts">
+import Cover from './components/cover.vue'
 import Header from './components/header.vue'
 import Aside from './components/aside.vue'
 import Footer from './components/footer.vue'
+import Cate from './components/cate.vue'
 </script>
 
 <style>

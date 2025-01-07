@@ -263,14 +263,10 @@ export default {
 <style lang="scss" scoped>
     .time {
         .date {
-            color: $c-333;
             font-size: 14px;
         }
         .week {
             color: $primary;
-        }
-        .calendar {
-            color:$c-666;
         }
     }
 </style>

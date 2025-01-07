@@ -5,26 +5,34 @@ useHead({ title: '博客列表' })
 defineOptions({ name: 'List' })
 const pageLoading = ref(true)
 const loading = ref(true)
+const query = useRoute().query
 const pageData = ref({
-  page: 1,
-  size: 10,
+  current: 1,
+  pageSize: 10,
   total: 0,
 })
 const { public: config } = useRuntimeConfig()
-const { status, data } = await useFetch(config.apiBase + '/article/list')
+const { status, data } = await useFetch(config.apiBase + '/article/list', {
+  method: 'get',
+  params: {...pageData.value, ...query },
+})
 onMounted(() => {
   pageLoading.value = status.value === 'pending'
 })
 const indexData = ref(data.value?.data || {})
 pageData.value.total = data.value?.data[1] || 0
-const getData = ({ page = 1, size = 10 } = {}) => {
+const getData = ({ current = 1, pageSize = 10 } = {}) => {
   loading.value = true
-  if (pageData.value.total < page * size || !loading.value) {
+  if (pageData.value.total < current * pageSize || !loading.value) {
     loading.value = false
     return
   }
-  pageData.value.page += page
-  $fetch(config.apiBase + '/article', { params: { current: pageData.value.page, pageSize: size } }).then((data) => {
+  pageData.value = {
+    ...pageData.value,
+    current: ++current,
+    pageSize: pageSize,
+  }
+  $fetch(config.apiBase + '/article', { params: { ...pageData.value, ...query } }).then((data) => {
     indexData.value[0] = [...indexData.value[0], ...data.data[0]]
     pageData.value.total = data.data[1]
     loading.value = false

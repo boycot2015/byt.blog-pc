@@ -9,7 +9,7 @@ div<template>
         <div class="title flexbox-h mb-5">
           照片墙
         </div>
-        <el-row class="imgs-list rounded-md overflow-hidden" :style="{ background: `url(${getBgUrl()}) center/cover no-repeat` }">
+        <el-row class="imgs-list rounded-xl overflow-hidden" :style="{ background: `url(${getBgUrl()}) center/cover no-repeat` }">
           <el-col
             v-for="(img, index) in picData"
             :key="index"

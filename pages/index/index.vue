@@ -24,7 +24,7 @@ useSeoMeta({ title: '首页', description: setting.value?.siteConfig?.gitHub })
 <template>
   <div class="blog-index w-[100%] md:w-[960px]">
     <Banner :data="setting.banner" />
-    <div v-if="indexData && indexData.newLeast" class="mt-[15px] w-[100%]">
+    <div v-if="indexData && indexData.newLeast" class="w-[100%]">
       <div
         v-for="(post, index) in indexData.newLeast"
         :key="post.id"

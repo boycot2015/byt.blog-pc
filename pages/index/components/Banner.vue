@@ -5,13 +5,13 @@
       <el-carousel-item
         v-for="item in data"
         :key="item.url"
-        class="rounded-md overflow-hidden"
+        class="rounded-xl overflow-hidden"
         :class="{ '!h-[360px]': isWindowBig, '!h-[auto]': !isWindowBig } "
       >
         <el-image
           :src="item.url"
           fit="cover"
-          class="rounded-md"
+          class="rounded-xl"
           :alt="item.title"
         />
       </el-carousel-item>

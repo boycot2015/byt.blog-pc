@@ -1,6 +1,6 @@
 <template>
   <div>
-    <aside class="sticky top-5 !w-[220px]">
+    <aside class="sticky top-[80px] !w-[220px]">
       <el-card class="mb-[--gap]" body-class="dark:text-white !p-[--gap]">
         <template #header>
           <Calendar />
@@ -17,7 +17,7 @@
       <el-card class="mb-[--gap] !border-none" body-class="dark:text-white !p-0">
         <WeatherComponent />
       </el-card>
-      <el-card v-loading="cateLoading" class="mb-[--gap]" body-class="min-h-[100px] max-h-[140px] overflow-y-auto dark:text-white !p-[--gap]">
+      <!-- <el-card v-loading="cateLoading" class="mb-[--gap]" body-class="min-h-[100px] max-h-[140px] overflow-y-auto dark:text-white !p-[--gap]">
         <template #header>
           <div class="flex justify-between">
             <div>
@@ -41,7 +41,7 @@
             {{ cate.value }}
           </el-tag>
         </div>
-      </el-card>
+      </el-card> -->
       <el-card v-loading="tagLoading" class="mb-[--gap]" body-class="min-h-[100px] max-h-[140px] overflow-y-auto dark:text-white !p-[--gap]">
         <template #header>
           <div class="flex justify-between">
@@ -99,7 +99,7 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .el-card {
-  background-color: transparent;
+  background-color: var(--el-mask-color);
 }
 :deep(.el-card__header) {
   padding: 5px var(--gap);

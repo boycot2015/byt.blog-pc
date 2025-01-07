@@ -1,5 +1,5 @@
 export default defineAppConfig({
-  title: 'blog',
+  title: 'Boycot@小站',
   logo: '/images/logo.png',
   author: 'Boycot',
   copyrightTime: new Date().getFullYear(),
@@ -100,13 +100,32 @@ export default defineAppConfig({
       query: {
       },
     },
+    {
+      path: '/friendlink',
+      name: 'friendlink',
+      meta: {
+        title: '友链',
+        hideAside: true,
+      },
+      query: {
+      },
+    },
+    {
+      name: 'turntoward',
+      meta: {
+        title: '开往',
+        hideAside: true,
+      },
+      query: {
+      },
+    },
   ],
   theme: {
     dark: true,
     colors: {
       primary: '#2dd4bf',
     },
-    bgUrl: '#fff',
+    bgUrl: '/images/cover.jpg',
   },
   about: {
     description: `项目技术栈：Nestjs + Node + Nuxtjs + Mysql <br/> 博客功能主要涉及到文章浏览、详情、文章评论几个模块。
@@ -266,4 +285,20 @@ export default defineAppConfig({
       baseroute: '/micro-music',
     }],
   },
+  links: [
+    {
+      name: 'boycot',
+      nickname: '江湖有缘再聚',
+      email: 'boycot2017@163.com',
+      avatar: 'https://boycot.top/favicon.ico',
+      url: 'https://github.com/boycot2015'
+    },
+    {
+      name: 'boycot-visitor',
+      nickname: '寒江孤影，江湖故人，相逢何必曾相识。朋友，来了就留个脚印吧。',
+      email: 'boycot2017@163.com',
+      // avatar: 'https://avatar.iran.liara.run/public',
+      url: 'https://baidu.com'
+    },
+  ]
 })

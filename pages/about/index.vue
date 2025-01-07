@@ -16,13 +16,13 @@ const onOpen = (item) => {
 </script>
 
 <template>
-  <div class="blog-index">
+  <div class="blog-about">
     <NuxtLayout name="custom">
-      <div class="about pd20 md:w-[1200px] mx-[auto] bgf text-left">
+      <div class="about pd20 rounded-xl md:w-[1200px] mx-[auto] bgf text-left">
         <div class="title text-center mb-[--gap]">
           <h3>关于我</h3>
         </div>
-        <div class="bg-[#006263] rounded-md m-[auto] mb-3">
+        <div class="bg-[#006263] m-[auto] mb-3">
           <el-image
             lazy
             fit="cover"
@@ -106,6 +106,10 @@ const onOpen = (item) => {
 </script>
 
 <style lang='scss' scoped>
+.about {
+  padding: 15px;
+  background-color: var(--el-mask-color);
+}
 .my-links {
   padding-top: 15px;
   margin-top: 20px;
@@ -141,7 +145,6 @@ const onOpen = (item) => {
           border-radius: 5px;
           overflow: hidden;
           transition: all 0.3s;
-          background: $white;
           &:nth-child(4n) {
               margin-right: 0;
           }

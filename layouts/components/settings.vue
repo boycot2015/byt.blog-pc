@@ -28,7 +28,7 @@
                   <el-image
                     lazy
                     :src="item.url"
-                    class="cursor-pointer rounded-md"
+                    class="cursor-pointer rounded-xl"
                     @click="setBg(item)" />
                 </el-col>
                 <el-col>

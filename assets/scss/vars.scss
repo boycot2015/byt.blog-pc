@@ -1,4 +1,9 @@
 @use '../css/var.css';
+html {
+    --el-mask-color: rgba(255, 255, 255, .6);
+    --el-bg-color-overlay: var(--el-mask-color) !important;
+    --el-fill-color-blank: var(--el-mask-color) !important;
+}
 html.dark {
     /* 自定义深色背景颜色 */
     color-scheme: dark;
@@ -50,7 +55,6 @@ html.dark {
     --el-box-shadow-dark: 0px 16px 48px 16px rgba(0, 0, 0, .72), 0px 12px 32px #000000, 0px 8px 16px -8px #000000;
     --el-bg-color-page: #0a0a0a;
     --el-bg-color: #141414 !important;
-    --el-bg-color-overlay: #1d1e1f;
     --el-text-color-primary: #E5EAF3;
     --el-text-color-regular: #CFD3DC;
     --el-text-color-secondary: #A3A6AD;
@@ -71,6 +75,7 @@ html.dark {
     --el-fill-color-blank: transparent;
     --el-mask-color: rgba(0, 0, 0, .8);
     --el-mask-color-extra-light: rgba(0, 0, 0, .3);
+    --el-bg-color-overlay: var(--el-mask-color);
 }
 $primary: var(--color-primary);
 $white: var(--text-color-white);

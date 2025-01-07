@@ -2,7 +2,7 @@
   <el-skeleton animated :loading="loading">
     <template #template>
       <div class="flex mb-[15px] w-[100%]">
-        <el-skeleton-item variant="image" class="!w-[180px] !h-[120px] !rounded-md mr-[--gap]" />
+        <el-skeleton-item variant="image" class="!w-[180px] !h-[120px] !rounded-xl mr-[--gap]" />
         <div class="flex flex-1 flex-col">
           <el-skeleton-item variant="h3" style="width: 240px; height: 30px;" />
           <el-skeleton-item variant="text" class="mt-[10px]" style="width: 240px; height: 20px;width: 100%;" />
@@ -13,7 +13,7 @@
     <template #default>
       <Transition name="slide-fade">
         <nuxt-link v-if="!loading" :to="`/list/${data.id}`">
-          <div class="flex mb-[--gap] rounded-md overflow-hidden transition-all translate-y-[-5px] hover:drop-shadow-xl shadow-xl dark:bg-black border border-[--el-border-color] justify-between">
+          <div class="flex mb-[--gap] rounded-xl overflow-hidden transition-all duration-[500ms] hover:translate-y-[-5px] hover:drop-shadow-xl shadow-xl bg-[--el-mask-color] border border-[--el-border-color] justify-between">
             <el-image
               :style="{ order: index % 2 === 0 ? 1 : 2 }"
               :src="data.img || data.imgUrl || (data.content?getImgUrl(data.content):'')"

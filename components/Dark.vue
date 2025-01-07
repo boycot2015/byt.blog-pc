@@ -1,9 +1,11 @@
 <template>
   <div @click="toggleTheme">
     <el-switch
+      class="pb-2"
       v-model="showDark"
-      :active-action-icon="Moon"
-      :inactive-action-icon="Sunny"
+      inline-prompt
+      :active-icon="Moon"
+      :inactive-icon="Sunny"
     />
   </div>
 </template>
