@@ -38,14 +38,10 @@ onMounted(() => {
   .el-tag {
     background-color: var(--el-mask-color);
     border: 1px dashed;
-    height: 32px;
   }
   .el-tabs {
     :deep(.el-tabs__header) {
         margin-bottom: 0;
-    }
-    :deep(.el-tabs__item) {
-      padding: 0 8px;
     }
     :deep(.el-tabs__nav-wrap:after) {
         height: 0;

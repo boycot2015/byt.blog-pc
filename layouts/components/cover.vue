@@ -1,14 +1,27 @@
 <template>
-    <div class="dark:bg-black h-[100vh] w-full flex flex-col items-center justify-center">
-        <h1 class="text-[64px]">{{ config.title }}</h1>
-        <Writer class="h-[42px] text-[24px] mt-[--gap]" />
-    </div>
+  <div class="dark:bg-black h-[100vh] w-full flex flex-col items-center justify-center">
+    <h1 class="text-[64px] text">
+      {{ config.title }}
+    </h1>
+    <Writer class="h-[42px] text-[24px] mt-[--gap] text" />
+  </div>
 </template>
 
 <script setup lang="ts">
+import { useDark } from '@vueuse/core'
 import Writer from '@/components/Writer/index.vue'
+
+const isDark = useDark()
+const color = computed(() => isDark.value ? 'rgba(0, 0, 0, 0.85)' : 'rgba(255, 255, 255, 0.85)')
 const config = useAppConfig()
 </script>
+
+<style lang="scss" scoped>
+.text {
+    user-select: none;
+    text-shadow: 5px 5px 20px v-bind(color);
+}
+</style>
 
 <style>
 .fade-enter-active,
@@ -29,4 +42,3 @@ const config = useAppConfig()
     transform: translateX(-30px);
 }
 </style>
-  

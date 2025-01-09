@@ -48,11 +48,11 @@ export default defineAppConfig({
     //     }
     // },
     {
-      path: '/message-board',
-      name: 'messageboard',
+      path: '/board',
+      name: 'board',
       meta: {
         title: '留言板',
-        hideInNav: true,
+        hideInNav: false,
         showBg: true,
         hideAside: true,
       },
@@ -291,14 +291,14 @@ export default defineAppConfig({
       nickname: '江湖有缘再聚',
       email: 'boycot2017@163.com',
       avatar: 'https://boycot.top/favicon.ico',
-      url: 'https://github.com/boycot2015'
+      url: 'https://github.com/boycot2015',
     },
     {
       name: 'boycot-visitor',
       nickname: '寒江孤影，江湖故人，相逢何必曾相识。朋友，来了就留个脚印吧。',
       email: 'boycot2017@163.com',
       // avatar: 'https://avatar.iran.liara.run/public',
-      url: 'https://baidu.com'
+      url: 'https://baidu.com',
     },
-  ]
+  ],
 })

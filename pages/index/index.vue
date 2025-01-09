@@ -2,6 +2,7 @@
 <script setup>
 import Item from '../list/components/Item.vue'
 import Banner from './components/Banner.vue'
+// import Cate from './components/cate.vue'
 
 const pageLoading = ref(true)
 const setting = useAppConfig()
@@ -23,6 +24,7 @@ useSeoMeta({ title: '首页', description: setting.value?.siteConfig?.gitHub })
 
 <template>
   <div class="blog-index w-[100%] md:w-[960px]">
+    <!-- <Cate class="sticky top-[80px] z-[999] backdrop-blur-sm" /> -->
     <Banner :data="setting.banner" />
     <div v-if="indexData && indexData.newLeast" class="w-[100%]">
       <div

@@ -148,6 +148,7 @@ onMounted(() => {
     ...appConfig,
     ...setting.data,
     theme: {
+      ...appConfig.theme,
       colors: {
         primary: '#409eff',
       },
@@ -156,6 +157,14 @@ onMounted(() => {
     banner: JSON.parse(setting.data?.banner || '[]'),
     activity: JSON.parse(setting.data?.activity || '{}'),
     siteConfig: JSON.parse(setting.data?.siteConfig || '{}'),
+    links: JSON.parse(setting.data?.siteConfig || '{}').links?.split(',').filter(el => el)
+      .map(el => ({
+        name: el.trim().split('|')[0],
+        url: el.trim().split('|')[1],
+        nickname: el.split('|')[2],
+      }))
+      .filter(el => el.name && el.url)
+      .flat() || [],
   }
   Object.assign(appConfig, data)
   onColorChange(data.theme.colors.primary)

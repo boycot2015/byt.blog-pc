@@ -11,6 +11,5 @@
     --gap: 15px;
     --border-radius: 5px;
     --el-bg-color: var(--main-bg) !important;
-    --el-bg-color-overlay: var(--main-bg) !important;
     --el-color-primary: var(--color-primary) !important;
 }

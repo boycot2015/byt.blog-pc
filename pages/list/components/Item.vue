@@ -13,7 +13,7 @@
     <template #default>
       <Transition name="slide-fade">
         <nuxt-link v-if="!loading" :to="`/list/${data.id}`">
-          <div class="flex mb-[--gap] rounded-xl overflow-hidden transition-all duration-[500ms] hover:translate-y-[-5px] hover:drop-shadow-xl shadow-xl bg-[--el-mask-color] border border-[--el-border-color] justify-between">
+          <div class="flex backdrop-blur-md mb-[--gap] rounded-xl overflow-hidden transition-all duration-[500ms] hover:translate-y-[-5px] hover:drop-shadow-xl shadow-xl bg-[--el-mask-color] border border-[--el-border-color] justify-between">
             <el-image
               :style="{ order: index % 2 === 0 ? 1 : 2 }"
               :src="data.img || data.imgUrl || (data.content?getImgUrl(data.content):'')"

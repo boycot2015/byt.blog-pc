@@ -54,6 +54,7 @@ const onOpen = (item) => {
               :key="item.name"
               :span="12"
               :md="{ span: 6 }"
+              :sm="{ span: 8 }"
               :title="item.name"
             >
               <a

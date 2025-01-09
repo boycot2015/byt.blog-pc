@@ -16,7 +16,7 @@ export default {
     }, // 圆的半径
     color: {
       type: String,
-      default: 'rgb(0, 102, 153)',
+      default: 'rgb(255, 255, 255)',
     },
     width: {
       type: [Number, String],
@@ -61,10 +61,10 @@ export default {
       const seconds = curDate.getSeconds()
       this.drawNum(this.MarginX, this.MarginY, parseInt(hour / 10), ctx, 'red')
       this.drawNum(this.MarginX + (this.RADIUS + 1) * 15, this.MarginY, parseInt(hour % 10), ctx, 'red')
-      this.drawNum(this.MarginX + (this.RADIUS + 1) * 32, this.MarginY, 10, ctx, '#00a2ff')
+      this.drawNum(this.MarginX + (this.RADIUS + 1) * 32, this.MarginY, 10, ctx, 'green')
       this.drawNum(this.MarginX + (this.RADIUS + 1) * 45, this.MarginY, parseInt(minute / 10), ctx, 'green')
       this.drawNum(this.MarginX + (this.RADIUS + 1) * 60, this.MarginY, parseInt(minute % 10), ctx, 'green')
-      this.drawNum(this.MarginX + (this.RADIUS + 1) * 78, this.MarginY, 10, ctx, '#00a2ff')
+      this.drawNum(this.MarginX + (this.RADIUS + 1) * 78, this.MarginY, 10, ctx, 'grey')
       this.drawNum(this.MarginX + (this.RADIUS + 1) * 90, this.MarginY, parseInt(seconds / 10), ctx, 'grey')
       this.drawNum(this.MarginX + (this.RADIUS + 1) * 105, this.MarginY, parseInt(seconds % 10), ctx, 'grey')
     },
@@ -89,7 +89,7 @@ export default {
 <style lang="scss">
     #timer-clock {
         margin: 0;
-        // background: @c-e8;
-        // box-shadow: 0 0 10px @c-666 inset;
+        // background:#e8e8e8;
+        // box-shadow: 0 0 10px #666 inset;
     }
 </style>

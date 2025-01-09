@@ -38,7 +38,7 @@ export const getLocal = (key?: string) => {
   if (key) {
     const getKey = key.toLowerCase().substring(3) // 去掉前面的use ，其它全部转小写
     // console.log(getKey, '的本地存储数据获取成功', localStorage.getItem(getKey) || '')
-    return JSON.parse(localStorage.getItem(getKey) || '')
+    return JSON.parse(localStorage.getItem(getKey) || '{}')
   }
   for (const key in enduring) {
     if (Object.prototype.hasOwnProperty.call(enduring, key)) {

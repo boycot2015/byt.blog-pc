@@ -1,7 +1,7 @@
 <template>
   <div class="dark:bg-black min-h-[300px] pb-[--gap]">
     <Header />
-    <div class="max-w-[1200px] text-center mx-[auto] min-h-[calc(100vh-200px)] my-[20px] dark:text-white p-[--gap] md:p-0">
+    <div class="max-w-[1200px] text-center mx-[auto] min-h-[calc(100vh-188px)] my-[20px] dark:text-white p-[--gap] md:p-0">
       <slot />
       <el-backtop />
     </div>

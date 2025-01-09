@@ -39,6 +39,11 @@ export default defineNuxtConfig({
       helloText: 'Hello from the Edge 👋',
     },
   },
+  routeRules: {
+    '/undefined': {
+      redirect: '/',
+    },
+  },
   // https://nuxt.com/docs/getting-started/upgrade#testing-nuxt-4
   future: { compatibilityVersion: 4 },
   compatibilityDate: '2024-07-30',
@@ -60,6 +65,12 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
+  plugins: [
+    {
+      src: '~/plugins/wang-editor',
+      mode: 'client',
+    }
+  ],
   // https://eslint.nuxt.com
   eslint: {
     config: {

@@ -20,7 +20,7 @@ div<template>
           >
             <div class="img">
               <el-image
-                fit="cover"
+                fit="fill"
                 preview-teleported
                 append-to-body
                 :initial-index="index"
@@ -32,10 +32,10 @@ div<template>
               />
             </div>
             <div class="action absolute w-full flex bottom-0 z-[999]">
-              <el-button class="flex-1 rounded-none border-l-0 mr-0" @click="onAction(img, 1)">
+              <el-button class="flex-1 rounded-none border-y-0 border-l-0 mr-0" @click="onAction(img, 1)">
                 设置为壁纸
               </el-button>
-              <el-button class="flex-1 rounded-none border-x-0 !ml-0" @click="onAction(img, 2)">
+              <el-button class="flex-1 rounded-none border-y-0 border-x-0 !ml-0" @click="onAction(img, 2)">
                 查看大图
               </el-button>
             </div>
@@ -58,6 +58,7 @@ div<template>
 import { Loading } from '@element-plus/icons-vue'
 import { actions } from '@/utils/theme'
 
+const appConfig = useAppConfig()
 const { loadingMore: getMore, getData } = actions
 const getLightStyle = (row) => {
   // console.log(row, 'row')
@@ -86,6 +87,7 @@ const getBgUrl = () => {
 const onAction = (row, type) => {
   switch (type) {
     case 1:
+      appConfig.theme.bgUrl = row.url
       actions.setWallpaper(row)
       break
     case 2:
@@ -152,13 +154,16 @@ definePageMeta({
             height: auto;
             overflow: hidden;
             position: relative;
+            .action {
+              transition: all .5s .2s;
+              transform: translateY(32px);
+            }
             .img {
                 transform: scale(1);
                 height: 100%;
                 transition: all .5s .2s;
                 .el-image {
                     height: 100%;
-                    display: block;
                 }
                 :deep(img)  {
                     max-width: 100%;
@@ -174,6 +179,9 @@ definePageMeta({
                     img {
                         filter: brightness(1);
                     }
+                }
+                .action {
+                  transform: translateY(0px);
                 }
             }
             &.light {

@@ -1,5 +1,5 @@
 <template>
-  <div class="text-center sticky z-[999] top-0 leading-[60px] w-full" :style="styles">
+  <div class="text-center sticky z-[999] top-0 leading-[60px] w-full" :style="styles" :class="{ 'backdrop-blur-md': !!styles.opty }">
     <div class="lg:max-w-[1200px] mx-[auto] px-[--gap] md:px-0 flex items-center">
       <nuxt-link to="/" class="h-[40px]">
         <el-image class="h-[100%] rounded-xl" :src="appConfig.logo" />
@@ -38,13 +38,13 @@ const route = useRoute()
 const activeTab = useState('activeTab', () => route.name as string)
 const styles = ref({
   backgroundColor: 'rgba(0, 0, 0, 0)',
-  opty: 1
+  opty: 0,
 })
 const onTabClick = () => {
   nextTick(() => {
     if (activeTab.value === 'turntoward') {
       const { links } = appConfig
-      let index:any = Math.floor(Math.random() * links.length) || 0
+      const index: any = Math.floor(Math.random() * links.length) || 0
       window.open(links[index]?.url)
       return
     }
@@ -57,21 +57,21 @@ watch(route, () => {
 watch(isDark, () => {
   styles.value = {
     ...styles.value,
-    backgroundColor: isDark.value ? `rgba(0, 0, 0, ${styles.value.opty})` : `rgba(255, 255, 255, ${styles.value.opty})`
+    backgroundColor: isDark.value ? `rgba(0, 0, 0, ${styles.value.opty})` : `rgba(255, 255, 255, ${styles.value.opty})`,
   }
 })
 defineOptions({
   name: 'LayoutHeader',
 })
-const setStyles = (opty:number) => {
+const setStyles = (opty: number) => {
   styles.value = {
     opty,
-    backgroundColor: isDark.value ? `rgba(0, 0, 0, ${Math.min(opty,0.9)})` : `rgba(255, 255, 255, ${Math.min(opty,0.9)})`
+    backgroundColor: isDark.value ? `rgba(0, 0, 0, ${Math.min(opty, 0.9)})` : `rgba(255, 255, 255, ${Math.min(opty, 0.9)})`,
   }
 }
 onMounted(() => {
-  window.addEventListener('scroll', (e:any) => {
-      setStyles(e.target.scrollingElement.scrollTop / document.documentElement.clientHeight)
+  window.addEventListener('scroll', (e: any) => {
+    setStyles(e.target.scrollingElement.scrollTop / document.documentElement.clientHeight)
   })
 })
 </script>
