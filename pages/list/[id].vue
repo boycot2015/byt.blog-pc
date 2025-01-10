@@ -1,5 +1,8 @@
 <!-- eslint-disable vue/no-v-html -->
 <script setup>
+import 'highlight.js/styles/default.css'
+import 'highlight.js/styles/vs.css'
+
 defineOptions({ name: 'Detail' })
 const route = useRoute()
 const pageLoading = ref(true)
@@ -26,26 +29,32 @@ definePageMeta({
   <div class="centered">
     <NuxtLayout name="custom">
       <!-- <NuxtWelcome /> -->
-      <div class="flex flex-col justify-start mb-[--gap] text-left">
-        <h3 class="self-start flex-2 mb-[--gap]">
+      <el-card class="flex flex-col justify-start mb-[--gap] text-left backdrop-blur-sm">
+        <h2 class="self-start flex-2 mb-[--gap] text-[18px] md:text-[32px]">
           {{ indexData.title }}
-        </h3>
-        <div class="tags flex-1 flex flex-col md:flex-row justify-between mb-[--gap]">
+        </h2>
+        <el-divider border-style="dashed" />
+        <div class="tags flex-1 flex flex-col items-center md:flex-row mb-[--gap]">
           <div class="mr-[--gap] mb-[--gap] md:mb-0 flex justify-between">
             分类：<span class="category mr-[--gap]">{{ indexData.category?.value || '--' }}</span>
             <span class="time flex-1 md:hidden text-right">{{ new Date(indexData.updateTime).toLocaleString() }}</span>
           </div>
-          <div class="flex-1">
-            标签：<el-tag v-for="tag in indexData.tags" :key="tag.value" class="tag  mr-[--gap]">
+          <div class="flex-1 flex items-center">
+            标签：<el-tag
+              v-for="tag in indexData.tags"
+              :key="tag.value"
+              type="primary"
+              effect="dark"
+              class="tag  mr-[--gap]">
               {{ tag.value }}
             </el-tag>
           </div>
-          <span class="time flex-1 hidden md:block text-right">{{ new Date(indexData.updateTime).toLocaleString() }}</span>
+          <span class="time hidden md:block text-right">{{ new Date(indexData.updateTime).toLocaleString() }}</span>
         </div>
-      </div>
-      <client-only>
-        <p class="text-left content text-justify min-h-[500px]" v-html="indexData.content" />
-      </client-only>
+        <client-only>
+          <p v-highlight class="text-left content text-justify min-h-[500px]" v-html="indexData.content" />
+        </client-only>
+      </el-card>
     </NuxtLayout>
   </div>
 </template>

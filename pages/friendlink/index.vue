@@ -4,8 +4,7 @@
       <el-col
         v-for="item in links"
         :key="item.url"
-        :span="6"
-        :xs="12"
+        :span="12"
         :md="8"
         :lg="6"
         :xl="4"
@@ -13,7 +12,7 @@
         <a :href="item.url" target="_blank" rel="noopener noreferrer">
           <el-card shadow="hover">
             <div class="flex flex-col items-center">
-              <el-image class="rounded-full w-[40px] h-[40px]" :src="item.avatar||'https://avatar.iran.liara.run/public'" />
+              <el-image class="rounded-full w-[40px] h-[40px]" :src="item.avatar||('https://avatar.iran.liara.run/public?timestamp='+new Date().getTime())" />
               <div class="flex flex-col">
                 <el-text class="my-[--gap]">{{ item.name }}</el-text>
                 <el-text class="min-h-[30px]">{{ item.nickname }}</el-text>

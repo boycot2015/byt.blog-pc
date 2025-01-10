@@ -8,6 +8,13 @@ export default defineNuxtConfig({
     '@nuxthub/core',
     '@nuxt/eslint',
   ],
+  plugins: [
+    {
+      src: '~/plugins/wang-editor',
+      mode: 'client',
+    },
+  ],
+  ssr: true,
   // https://devtools.nuxt.com
   devtools: { enabled: true },
   app: {
@@ -43,10 +50,21 @@ export default defineNuxtConfig({
     '/undefined': {
       redirect: '/',
     },
+    '/blog-api/**': {
+      proxy: 'http://localhost:3000/blog-api/**',
+    },
   },
   // https://nuxt.com/docs/getting-started/upgrade#testing-nuxt-4
   future: { compatibilityVersion: 4 },
   compatibilityDate: '2024-07-30',
+  nitro: {
+    devProxy: {
+      '/blog-api': {
+        target: 'https://blog-api.boycot.top',
+        changeOrigin: true,
+      },
+    },
+  },
   // https://hub.nuxt.com/docs/getting-started/installation#options
   hub: {},
   vite: {
@@ -65,12 +83,6 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
-  plugins: [
-    {
-      src: '~/plugins/wang-editor',
-      mode: 'client',
-    }
-  ],
   // https://eslint.nuxt.com
   eslint: {
     config: {

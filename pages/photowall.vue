@@ -31,7 +31,7 @@ div<template>
                 alt=""
               />
             </div>
-            <div class="action absolute w-full flex bottom-0 z-[999]">
+            <div class="action absolute w-full flex bottom-0 z-[999] bg-[--el-mask-color]">
               <el-button class="flex-1 rounded-none border-y-0 border-l-0 mr-0" @click="onAction(img, 1)">
                 设置为壁纸
               </el-button>

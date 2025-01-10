@@ -1,9 +1,9 @@
 <template>
   <div class="dark:bg-black h-[100vh] w-full flex flex-col items-center justify-center">
-    <h1 class="text-[64px] text">
+    <h1 class="text-[42px] md:text-[64px] text">
       {{ config.title }}
     </h1>
-    <Writer class="h-[42px] text-[24px] mt-[--gap] text" />
+    <Writer class="h-[42px] text-[18px] md:text-[24px] text-center mt-[--gap] text" />
   </div>
 </template>
 

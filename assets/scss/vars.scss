@@ -3,6 +3,9 @@ html {
     --el-mask-color: rgba(255, 255, 255, .6);
     // --el-bg-color-overlay: var(--el-mask-color) !important;
     // --el-fill-color-blank: var(--el-mask-color) !important;
+    .el-card {
+        --el-card-bg-color: rgba(255, 255, 255, .8);
+    }
 }
 html.dark {
     /* 自定义深色背景颜色 */
@@ -75,6 +78,9 @@ html.dark {
     --el-fill-color-blank: transparent;
     --el-mask-color: rgba(0, 0, 0, .8);
     --el-mask-color-extra-light: rgba(0, 0, 0, .3);
+    .el-card {
+        --el-card-bg-color: rgba(0, 0, 0, .8);
+    }
 }
 $primary: var(--color-primary);
 $white: var(--text-color-white);

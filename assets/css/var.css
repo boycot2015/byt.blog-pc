@@ -9,7 +9,9 @@
     --text-color-ccc: #ccc;
     --text-color-white: white;
     --gap: 15px;
-    --border-radius: 5px;
+    --border-radius: 8px;
     --el-bg-color: var(--main-bg) !important;
     --el-color-primary: var(--color-primary) !important;
+    /* --el-fill-color-blank: rgba(255,255,255,.5) !important;
+    --el-bg-color-overlay: rgba(255,255,255,.5) !important; */
 }

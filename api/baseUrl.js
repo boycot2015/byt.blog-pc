@@ -6,7 +6,7 @@ const env = process.env.NODE_ENV
 console.log(env, 'env')
 switch (env) {
   case 'development':
-    // baseUrl = 'http://127.0.0.1:3009'
+    baseUrl = '/blog-api'
     apiUrl = 'http://api.boycot.top/api'
     // apiUrl = 'http://43.138.211.108:8090/api'
     weatherApi = apiUrl + '/weather'

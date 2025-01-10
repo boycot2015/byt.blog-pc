@@ -20,7 +20,7 @@ const onOpen = (item) => {
     <NuxtLayout name="custom">
       <div class="about pd20 rounded-xl md:w-[1200px] mx-[auto] bgf text-left">
         <div class="title text-center mb-[--gap]">
-          <h3>关于我</h3>
+          <h3>关于</h3>
         </div>
         <div class="bg-[#006263] m-[auto] mb-3">
           <el-image
@@ -46,7 +46,7 @@ const onOpen = (item) => {
         </div>
         <div class="my-links ">
           <h3 class="title mb-[--gap]">
-            我的作品
+            我的小站
           </h3>
           <el-row class="list" :gutter="16">
             <el-col

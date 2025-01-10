@@ -1,8 +1,8 @@
 <template>
   <div @click="toggleTheme">
     <el-switch
-      class="pb-2"
       v-model="showDark"
+      class="pb-2"
       inline-prompt
       :active-icon="Moon"
       :inactive-icon="Sunny"
@@ -20,7 +20,7 @@ const isDark = useDark({
   valueDark: 'dark',
   valueLight: 'light',
 })
-const showDark = ref(false)
+const showDark = ref(isDark.value)
 
 const toggleDark = useToggle(isDark)
 const toggleTheme = (event) => {

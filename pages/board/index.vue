@@ -38,19 +38,20 @@ const submit = () => {
   formRef.value.validate((valid) => {
     if (valid) {
       submitLoading.value = true
-      useFetch(config.apiBase + '/comment/board/add', {
+      $fetch(config.apiBase + '/comment/board/add', {
         method: 'post',
         body: { ...formData.value },
       }).then(() => {
-        useFetch(config.apiBase + '/comment/board', {
+        loading.value = true
+        $fetch(config.apiBase + '/comment/board', {
           method: 'get',
           params: { ...pageData.value },
         }).then((res) => {
-          data.value = res.data
+          data.value = res
           loading.value = false
         })
-      }).catch(() => {
-        ElMessage.error('提交失败，请稍后再试！')
+      }).catch((err) => {
+        ElMessage.error(err + '提交失败，请稍后再试！')
       }).finally(() => {
         submitLoading.value = false
       })
@@ -73,45 +74,51 @@ const submit = () => {
           ref="formRef"
           :rules="rules"
           :model="formData"
-          inline>
+          inline
+        >
           <el-form-item prop="content" required class="w-full">
             <client-only>
               <Editor v-model="formData.content" />
             </client-only>
           </el-form-item>
-          <el-form-item class="flex w-full">
-            <el-form-item
-              prop="name"
-              required
-              label="昵称："
-              class="flex-1">
-              <el-input v-model="formData.name" placeholder="请输入昵称" class="w-full" />
-            </el-form-item>
-            <el-form-item prop="email" label="邮箱：" class="flex-1">
-              <el-input v-model="formData.email" placeholder="请输入邮箱" class="w-full" />
-            </el-form-item>
-            <el-form-item>
-              <el-button type="primary" :loading="submitLoading" @click="submit">
-                提交
-              </el-button>
-            </el-form-item>
+          <el-form-item class="!flex flex-col !mr-0 md:flex-row w-full">
+            <div class="flex flex-col md:flex-row w-full flex-nowrap">
+              <el-form-item
+                prop="name"
+                required
+                label="昵称："
+                class="flex-1 !mr-0">
+                <el-input v-model="formData.name" placeholder="请输入昵称" class="w-full" />
+              </el-form-item>
+              <el-form-item prop="email" label="邮箱：" class="flex-1 !mr-0 md:ml-2 mt-[--gap] md:mt-0">
+                <el-input v-model="formData.email" placeholder="请输入邮箱" class="w-full" />
+              </el-form-item>
+              <el-form-item class="ml-2 !mr-0 self-end mt-[--gap] md:mt-0">
+                <el-button type="primary" :loading="submitLoading" @click="submit">
+                  提交
+                </el-button>
+              </el-form-item>
+            </div>
           </el-form-item>
         </el-form>
+        <el-alert
+          type="warning"
+          :closable="false"
+          class="mb-[--gap]"
+          title="友链规则：昵称｜网址｜个性签名" />
         <div v-loading="loading">
           <el-row :gutter="10">
             <el-col
               v-for="item in data.data[0]"
               :key="item.id"
               :span="12"
-              :sm="12"
-              :xs="12"
-              :md="8"
+              :sm="8"
               :lg="6"
               :xl="4"
             >
               <el-card
                 class="mb-[--gap]"
-                :header="item.name">
+                :header="'@'+item.name">
                 <div v-html="item.content" />
               </el-card>
             </el-col>

@@ -11,7 +11,7 @@
           :y="18"
           :height="60"
           :radius="0.6"
-          class="dark:bg-black"
+          class="dark:bg-black timer"
         />
       </el-card>
       <el-card class="mb-[--gap] !border-none" body-class="dark:text-white !p-0">
@@ -100,6 +100,9 @@ onMounted(() => {
 <style lang="scss" scoped>
 .el-card {
   background-color: var(--el-mask-color);
+}
+.timer {
+  text-shadow: 5px 5px 20px var(--el-mask-color);
 }
 :deep(.el-card__header) {
   padding: 5px var(--gap);

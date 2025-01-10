@@ -7,8 +7,8 @@
         <Cate />
       </div>
     </template>
-    <div class="w-full max-w-[1200px] mx-[auto] my-[20px] flex flex-col md:flex-row justify-between">
-      <main class="min-h-[300px] w-full dark:text-white p-[--gap] md:p-0">
+    <div class="w-full max-w-[1200px] mx-[auto] my-[20px] flex flex-col md:flex-row justify-center xl:justify-between">
+      <main class="min-h-[300px] w-full dark:text-white px-[--gap] lg:max-w-[860px] xl:max-w-[960px]">
         <slot />
       </main>
       <Aside class="hidden lg:block w-[220px] ml-[--gap]" />

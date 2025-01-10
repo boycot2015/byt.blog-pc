@@ -23,7 +23,7 @@ useSeoMeta({ title: '首页', description: setting.value?.siteConfig?.gitHub })
 </script>
 
 <template>
-  <div class="blog-index w-[100%] md:w-[960px]">
+  <div class="blog-index w-[100%]">
     <!-- <Cate class="sticky top-[80px] z-[999] backdrop-blur-sm" /> -->
     <Banner :data="setting.banner" />
     <div v-if="indexData && indexData.newLeast" class="w-[100%]">

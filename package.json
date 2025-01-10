@@ -23,6 +23,7 @@
     "@wangeditor/editor-for-vue": "^5.1.12",
     "dayjs": "^1.11.13",
     "element-plus": "^2.8.7",
+    "highlight.js": "^11.11.1",
     "nuxt": "^3.14.0",
     "pinia": "^2.2.6",
     "vue": "^3.5.12",

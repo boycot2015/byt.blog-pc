@@ -1,10 +1,10 @@
 <template>
-  <div class="text-center sticky z-[999] top-0 leading-[60px] w-full" :style="styles" :class="{ 'backdrop-blur-md': !!styles.opty }">
-    <div class="lg:max-w-[1200px] mx-[auto] px-[--gap] md:px-0 flex items-center">
-      <nuxt-link to="/" class="h-[40px]">
+  <div class="text-center sticky z-[999] top-0 leading-[60px] w-full px-[--gap]" :style="styles" :class="{ 'backdrop-blur-md': !!styles.opty }">
+    <div class="flex md:max-w-[1200px] mx-[auto] px-[--gap] md:px-0 items-center">
+      <nuxt-link to="/" class="h-[40px] hidden md:block">
         <el-image class="h-[100%] rounded-xl" :src="appConfig.logo" />
       </nuxt-link>
-      <el-tabs v-model="activeTab" class="lg:max-w-[1200px] ml-[auto] mr-4 text-right nav-list" @tab-click="onTabClick">
+      <el-tabs v-model="activeTab" class="w-full md:w-[auto] md:max-w-[1200px] md:ml-[auto] mr-[--gap] text-right nav-list" @tab-click="onTabClick">
         <el-tab-pane
           v-for="nav in appConfig.navList.filter(el => !el.meta?.hideInNav)"
           :key="nav.name"
@@ -74,6 +74,7 @@ onMounted(() => {
     setStyles(e.target.scrollingElement.scrollTop / document.documentElement.clientHeight)
   })
 })
+const color = computed(() => isDark.value ? 'rgba(0, 0, 0, 0.85)' : 'rgba(255, 255, 255, 0.85)')
 </script>
 
 <style lang="scss" scoped>
@@ -82,6 +83,9 @@ onMounted(() => {
 }
 :deep(.nav-list .el-tabs__header) {
     margin: 0;
-    --el-tabs-header-height: 30px;
+    .el-tabs__item {
+      text-shadow: 1px 1px 5px v-bind(color);
+    }
+    // --el-tabs-header-height: 30px;
 }
 </style>

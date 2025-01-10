@@ -1,7 +1,7 @@
 <template>
   <div>
     <footer class="!w-full relative z-9999 text-center dark:text-white">
-      <div class="wrap w-full md:w-[1200px] mx-[auto] flex flex-col md:flex-row justify-center items-center">
+      <div class="wrap w-full md:max-w-[1200px] mx-[auto] flex flex-col lg:flex-row justify-center items-center">
         <div class="text-center flex-1">
           <p>Designed By {{ websiteConfig.author }}</p>
           <p>Copyright © {{ websiteConfig.copyrightTime }}. All Rights Reserved.</p>
@@ -36,6 +36,18 @@
 </template>
 
 <script setup lang="ts">
+import { useDark } from '@vueuse/core'
+
 const appConfig = useAppConfig()
 const websiteConfig = computed(() => ({ ...appConfig }))
+
+const isDark = useDark()
+const color = computed(() => isDark.value ? 'rgba(0, 0, 0, 0.85)' : 'rgba(255, 255, 255, 0.85)')
 </script>
+
+<style lang="scss" scoped>
+footer {
+    user-select: none;
+    text-shadow: 10px 10px 100px v-bind(color);
+}
+</style>

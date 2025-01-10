@@ -8,7 +8,7 @@ const loading = ref(true)
 const query = useRoute().query
 const pageData = ref({
   current: 1,
-  pageSize: 10,
+  pageSize: 5,
   total: 0,
 })
 const { public: config } = useRuntimeConfig()
@@ -42,11 +42,11 @@ const getData = ({ current = 1, pageSize = 10 } = {}) => {
 </script>
 
 <template>
-  <div v-infinite-scroll="() => getData(pageData)" class="blog-list">
+  <div v-infinite-scroll="() => getData(pageData)" class="blog-list w-[100%]">
     <div
       v-for="(post, index) in indexData[0]"
       :key="post.id"
-      class="w-[100%] md:w-[960px]"
+      class="w-[100%]"
     >
       <Item :data="post" :index="index" :loading="pageLoading" />
     </div>
