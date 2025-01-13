@@ -7,10 +7,7 @@
             "config": {
                 "serverFiles": [
                     "package.json"
-                ],
-                "tscOptions": {
-                    "sourceMap": false
-                }
+                ]
             }
         }
     ]
