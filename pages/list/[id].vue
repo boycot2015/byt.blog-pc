@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/no-v-html -->
 <script setup>
-import 'highlight.js/styles/default.css'
-import 'highlight.js/styles/vs.css'
+// import 'highlight.js/styles/default.css'
+// import 'highlight.js/styles/vs.css'
 
 defineOptions({ name: 'Detail' })
 const route = useRoute()
@@ -14,8 +14,10 @@ const { status, data } = await useAsyncData('index-data', async () => {
   ])
   return { data: indexRes.data }
 })
-onMounted(() => {
+onMounted(async () => {
   pageLoading.value = status.value === 'pending'
+  const { $Prism } = useNuxtApp()
+  $Prism.highlightAll()
 })
 const indexData = ref(data.value?.data || {})
 // console.log(indexData.value, route.params, 'indexData')
@@ -26,7 +28,7 @@ definePageMeta({
 </script>
 
 <template>
-  <div class="centered">
+  <div class="desc">
     <NuxtLayout name="custom">
       <!-- <NuxtWelcome /> -->
       <el-card class="flex flex-col justify-start mb-[--gap] text-left backdrop-blur-sm">
@@ -34,10 +36,10 @@ definePageMeta({
           {{ indexData.title }}
         </h2>
         <el-divider border-style="dashed" />
-        <div class="tags flex-1 flex flex-col items-center md:flex-row mb-[--gap]">
+        <div class="tags !text-left flex-1 flex flex-col md:items-center md:flex-row mb-[--gap]">
           <div class="mr-[--gap] mb-[--gap] md:mb-0 flex justify-between">
             分类：<span class="category mr-[--gap]">{{ indexData.category?.value || '--' }}</span>
-            <span class="time flex-1 md:hidden text-right">{{ new Date(indexData.updateTime).toLocaleString() }}</span>
+            <span class="time flex-1 md:hidden text-right">{{ new Date(indexData.createTime).toLocaleString() }}</span>
           </div>
           <div class="flex-1 flex items-center">
             标签：<el-tag
@@ -49,10 +51,10 @@ definePageMeta({
               {{ tag.value }}
             </el-tag>
           </div>
-          <span class="time hidden md:block text-right">{{ new Date(indexData.updateTime).toLocaleString() }}</span>
+          <span class="time hidden md:block text-right">发布时间：{{ new Date(indexData.createTime).toLocaleString() }}</span>
         </div>
         <client-only>
-          <p v-highlight class="text-left content text-justify min-h-[500px]" v-html="indexData.content" />
+          <p class="text-left content text-justify min-h-[500px] lang-js" v-html="indexData.content" />
         </client-only>
       </el-card>
     </NuxtLayout>
@@ -60,10 +62,6 @@ definePageMeta({
 </template>
 
 <style lang="scss" scoped>
-.centered {
-  width: 100%;
-  text-align: center;
-}
 h1 {
   font-size: 32px;
 }
@@ -73,12 +71,8 @@ h1 {
   }
 }
 a {
-  color: #888;
   text-decoration: none;
   font-size: 18px;
-}
-a:hover {
-  text-decoration: underline;
 }
 :deep(.content) {
   img {

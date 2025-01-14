@@ -4,43 +4,65 @@ div<template>
     :infinite-scroll-distance="100">
     <NuxtLayout name="custom">
       <div
-        v-loading="state.pageLoading"
         class="photowall about md:pt-5 min-h-[300px]">
         <div class="title flexbox-h mb-5">
           照片墙
         </div>
-        <el-row class="imgs-list rounded-xl overflow-hidden" :style="{ background: `url(${getBgUrl()}) center/cover no-repeat` }">
-          <el-col
-            v-for="(img, index) in picData"
-            :key="index"
-            :span="12"
-            :md="{ span: 6 }"
-            class="imgs-list-item fl"
-            :class="{ light: getLightStyle(img, index), dark: getDarkStyle(img, index) }"
-          >
-            <div class="img">
-              <el-image
-                fit="fill"
-                preview-teleported
-                append-to-body
-                :initial-index="index"
-                :src="img.url"
-                :preview-src-list="picData.map(el => el.realUrl)"
-                :style="{ ...img.style }"
-                lazy
-                alt=""
-              />
-            </div>
-            <div class="action absolute w-full flex bottom-0 z-[999] bg-[--el-mask-color]">
-              <el-button class="flex-1 rounded-none border-y-0 border-l-0 mr-0" @click="onAction(img, 1)">
-                设置为壁纸
-              </el-button>
-              <el-button class="flex-1 rounded-none border-y-0 border-x-0 !ml-0" @click="onAction(img, 2)">
-                查看大图
-              </el-button>
-            </div>
-          </el-col>
-        </el-row>
+        <el-skeleton :loading="state.pageLoading" class="rounded-xl" animated>
+          <template #template>
+            <el-row
+              class="w-[100%] rounded-xl flex"
+              :gutter="15"
+            >
+              <el-col
+                v-for="item in 16"
+                :key="item.id"
+                :span="12"
+                :sm="8"
+                :md="6"
+                class="mb-[--gap]"
+              >
+                <el-skeleton-item
+                  variant="image"
+                  class="w-full h-[150px] rounded-xl" />
+              </el-col>
+            </el-row>
+          </template>
+          <template #default>
+            <el-row class="imgs-list rounded-xl overflow-hidden" :style="{ background: `url(${getBgUrl()}) center/cover no-repeat` }">
+              <el-col
+                v-for="(img, index) in picData"
+                :key="index"
+                :span="12"
+                :sm="8"
+                :md="6"
+                class="imgs-list-item fl"
+                :class="{ light: getLightStyle(img, index), dark: getDarkStyle(img, index) }"
+              >
+                <div class="img">
+                  <el-image
+                    fit="cover"
+                    preview-teleported
+                    append-to-body
+                    :initial-index="index"
+                    :src="img.url"
+                    :preview-src-list="picData.map(el => el.realUrl)"
+                    :style="{ ...img.style }"
+                    alt=""
+                  />
+                </div>
+                <div class="action absolute w-full flex bottom-0 z-[999] bg-[--el-mask-color]">
+                  <el-button class="flex-1 rounded-none border-y-0 border-l-0 mr-0" @click="onAction(img, 1)">
+                    设置为壁纸
+                  </el-button>
+                  <el-button class="flex-1 rounded-none border-y-0 border-x-0 !ml-0" @click="onAction(img, 2)">
+                    查看大图
+                  </el-button>
+                </div>
+              </el-col>
+            </el-row>
+          </template>
+        </el-skeleton>
         <div class="more-btn mt-[--gap]">
           <div v-if="state.loading" class="flex items-center justify-center">
             <el-icon class="el-icon-loading mr-2">
@@ -81,8 +103,7 @@ const getDarkStyle = (row) => {
 const getBgUrl = () => {
   const len = picData.value.length
   if (!len) return ''
-  const url = picData.value[Math.floor(Math.random() * len)].realUrl
-  return url || picData.value[0] || picData.value[0].url || ''
+  return picData.value[0] || picData.value[0].url || ''
 }
 const onAction = (row, type) => {
   switch (type) {
@@ -100,7 +121,9 @@ const onAction = (row, type) => {
 getData({ pageno: 1, count: 16 }).then((res) => {
   total.value = res.data.total
   picData.value = res.data.picData || []
-  state.pageLoading = false
+  nextTick(() => {
+    state.pageLoading = false
+  })
 })
 const loadingMore = () => {
   if (state.loading) return
@@ -130,7 +153,7 @@ definePageMeta({
 <style lang='scss' scoped>
 .photowall {
     min-height: 700px;
-    // background: rgba(0, 0, 0, 0.8);
+    background: transparent;
     overflow: auto;
     &.about .title h3 {
         color: $c-ccc;

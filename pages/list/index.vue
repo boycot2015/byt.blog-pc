@@ -12,16 +12,10 @@ const pageData = ref({
   total: 0,
 })
 const { public: config } = useRuntimeConfig()
-const { status, data } = await useFetch(config.apiBase + '/article/list', {
-  method: 'get',
-  params: { ...pageData.value, ...query },
-})
 onMounted(() => {
-  pageLoading.value = status.value === 'pending'
 })
-const indexData = ref(data.value?.data || {})
-pageData.value.total = data.value?.data[1] || 0
-const getData = ({ current = 1, pageSize = 10 } = {}) => {
+const indexData = ref([[], 0])
+const getData = ({ current = 0, pageSize = 10 } = {}) => {
   loading.value = true
   if (pageData.value.total < current * pageSize || !loading.value) {
     loading.value = false
@@ -36,23 +30,49 @@ const getData = ({ current = 1, pageSize = 10 } = {}) => {
     indexData.value[0] = [...indexData.value[0], ...data.data[0]]
     pageData.value.total = data.data[1]
     loading.value = false
+    pageLoading.value = false
   })
 }
+getData()
 // console.log(indexData.value, 'indexData')
 </script>
 
 <template>
   <div v-infinite-scroll="() => getData(pageData)" class="blog-list w-[100%]">
-    <div
-      v-for="(post, index) in indexData[0]"
-      :key="post.id"
-      class="w-[100%]"
-    >
-      <Item :data="post" :index="index" :loading="pageLoading" />
-    </div>
-    <p v-if="loading" class="text-center">
-      数据加载中...
-    </p>
+    <el-skeleton :loading="pageLoading" animated>
+      <template #template>
+        <div
+          v-for="(post, index) in 5"
+          :key="post.id"
+          class="w-[100%] flex mb-[--gap]"
+          :style="{ order: index % 2 === 0 ? 1 : 2 }"
+        >
+          <el-skeleton-item
+            variant="image"
+            class="rounded-xl"
+            style="width: 30%;height: 120px;" />
+          <div class="flex-1 ml-[--gap]" :style="{ order: index % 2 === 0 ? 2 : 1 }">
+            <el-skeleton-item variant="h3" style="width: 40%;" />
+            <el-skeleton-item variant="p" />
+            <el-skeleton-item variant="p" />
+            <el-skeleton-item variant="p" />
+            <el-skeleton-item variant="p" style="width: 60%;" />
+          </div>
+        </div>
+      </template>
+      <template #default>
+        <div
+          v-for="(post, index) in indexData[0]"
+          :key="post.id"
+          class="w-[100%]"
+        >
+          <Item :data="post" :index="index" :loading="pageLoading" />
+        </div>
+        <p v-if="loading&&pageData.pageSize>1" class="text-center">
+          数据加载中...
+        </p>
+      </template>
+    </el-skeleton>
   </div>
 </template>
 

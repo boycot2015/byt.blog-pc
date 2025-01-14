@@ -8,7 +8,7 @@
 
     <WeEditor
       v-model="valueHtml"
-      style="height: 300px; overflow-y: hidden"
+      style="height: 320px; overflow-y: hidden"
       :default-config="editorConfig"
       :mode="mode"
       @on-created="handleCreated"

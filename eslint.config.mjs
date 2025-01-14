@@ -8,4 +8,5 @@ export default withNuxt(
   'vue/no-v-html': 'off',
   'vue/html-closing-bracket-newline': 'off',
   '@typescript-eslint/no-explicit-any': 'off',
+  '@typescript-eslint/no-unused-expressions': 'off',
 })

@@ -1,35 +1,22 @@
 <template>
-  <el-skeleton animated :loading="loading">
-    <template #template>
-      <div class="flex mb-[15px] w-[100%]">
-        <el-skeleton-item variant="image" class="!w-[180px] !h-[120px] !rounded-xl mr-[--gap]" />
-        <div class="flex flex-1 flex-col">
-          <el-skeleton-item variant="h3" style="width: 240px; height: 30px;" />
-          <el-skeleton-item variant="text" class="mt-[10px]" style="width: 240px; height: 20px;width: 100%;" />
-          <el-skeleton-item variant="text" class="mt-[10px]" style="width: 240px; height: 20px;width: 60%;" />
+  <Transition name="slide-fade">
+    <nuxt-link :to="`/list/${data.id}`">
+      <div class="flex mb-[--gap] rounded-xl overflow-hidden transition-all duration-[500ms] hover:translate-y-[-5px] hover:drop-shadow-xl shadow-xl bg-[--el-mask-color] border border-[--el-border-color] justify-between">
+        <el-image
+          lazy
+          :style="{ order: index % 2 === 0 ? 1 : 2 }"
+          :src="data.img || data.imgUrl || (data.content?getImgUrl(data.content):'')"
+          fit="cover"
+          class="w-[180px] h-[160px]" />
+        <div class="flex-1 ml-[--gap] p-4 max-w-[100%] max-h-[160px]" :style="{ order: index % 2 === 0 ? 2 : 1 }">
+          <div class="title line-clamp-1 text-[16px] mb-[--gap]">
+            {{ data.title }}
+          </div>
+          <div v-if="data.content" class="desc text-[14px] text-justify text-wrap line-clamp-4 min-h-[40px]" v-html="data.content.replace(getImgUrl(data.content), '')" />
         </div>
       </div>
-    </template>
-    <template #default>
-      <Transition name="slide-fade">
-        <nuxt-link v-if="!loading" :to="`/list/${data.id}`">
-          <div class="flex mb-[--gap] rounded-xl overflow-hidden transition-all duration-[500ms] hover:translate-y-[-5px] hover:drop-shadow-xl shadow-xl bg-[--el-mask-color] border border-[--el-border-color] justify-between">
-            <el-image
-              :style="{ order: index % 2 === 0 ? 1 : 2 }"
-              :src="data.img || data.imgUrl || (data.content?getImgUrl(data.content):'')"
-              fit="cover"
-              class="w-[180px] h-[160px]" />
-            <div class="flex-1 ml-[--gap] p-4 max-w-[100%] max-h-[160px]" :style="{ order: index % 2 === 0 ? 2 : 1 }">
-              <div class="title line-clamp-1 text-[16px] mb-[--gap]">
-                {{ data.title }}
-              </div>
-              <div v-if="data.content" class="desc text-[14px] text-justify text-wrap line-clamp-4 min-h-[40px]" v-html="data.content.replace(getImgUrl(data.content), '')" />
-            </div>
-          </div>
-        </nuxt-link>
-      </Transition>
-    </template>
-  </el-skeleton>
+    </nuxt-link>
+  </Transition>
 </template>
 
 <script setup>

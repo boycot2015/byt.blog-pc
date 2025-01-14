@@ -1,4 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import prismjs from 'vite-plugin-prismjs'
 import { baseUrl, apiUrl } from './api/baseUrl'
 
 export default defineNuxtConfig({
@@ -18,19 +19,19 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   app: {
     head: {
-      // titleTemplate: '%s | 博客',
+      titleTemplate: '%s | Boycot@小站',
       charset: 'utf-8',
       viewport: 'width=device-width, initial-scale=1',
       script: [{
         src: 'https://cdn.bootcdn.net/ajax/libs/skycons/1396634940/skycons.min.js',
       }],
     },
-    // pageTransition: {
-    //   name: 'fade',
-    //   mode: 'out-in', // 默认值
-    // },
+    pageTransition: {
+      name: 'fade',
+      mode: 'out-in', // 默认值
+    },
     // layoutTransition: {
-    //   name: 'fade',
+    //   name: 'slide-fade',
     //   mode: 'out-in', // 默认值
     // },
   },
@@ -65,7 +66,6 @@ export default defineNuxtConfig({
     },
   },
   // https://hub.nuxt.com/docs/getting-started/installation#options
-  hub: {},
   vite: {
     css: {
       preprocessorOptions: {
@@ -75,6 +75,33 @@ export default defineNuxtConfig({
         },
       },
     },
+    plugins: [
+      prismjs({
+        languages: [
+          'css',
+          'sass',
+          'scss',
+          'javascript',
+          'js',
+          'html',
+          'swift',
+          'xml',
+          'typescript',
+          'dart',
+          'csharp',
+          'json',
+          'sql',
+          'bash',
+          'md',
+          'nginx',
+          'cpp',
+          'java',
+        ],
+        plugins: ['toolbar', 'show-language', 'copy-to-clipboard'],
+        theme: 'tomorrow',
+        css: true,
+      }),
+    ],
   },
   postcss: {
     plugins: {

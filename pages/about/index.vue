@@ -18,7 +18,7 @@ const onOpen = (item) => {
 <template>
   <div class="blog-about">
     <NuxtLayout name="custom">
-      <div class="about pd20 rounded-xl md:w-[1200px] mx-[auto] bgf text-left">
+      <div class="about pd20 rounded-xl w-[100%] md:max-w-[1200px] mx-[auto] bgf text-left">
         <div class="title text-center mb-[--gap]">
           <h3>关于</h3>
         </div>
@@ -26,8 +26,8 @@ const onOpen = (item) => {
           <el-image
             lazy
             fit="cover"
-            class="img w-[75%] block m-[auto]"
-            src="/images/about.jpg"
+            class="img w-[100%] block m-[auto]"
+            src="/images/about.gif"
             alt=""
             title="程序猿"
           />
