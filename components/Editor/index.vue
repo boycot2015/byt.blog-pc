@@ -1,101 +1,153 @@
 <template>
-  <div style="border: 1px solid #ccc; margin-top: 10px">
-    <WeToolbar
-      style="border-bottom: 1px solid #ccc"
-      :editor="editorRef"
-      :default-config="toolbarConfig"
-      :mode="mode" />
-
-    <WeEditor
-      v-model="valueHtml"
-      style="height: 320px; overflow-y: hidden"
-      :default-config="editorConfig"
-      :mode="mode"
-      @on-created="handleCreated"
-      @on-change="handleChange"
-      @on-destroyed="handleDestroyed"
-      @on-focus="handleFocus"
-      @on-blur="handleBlur"
-      @custom-alert="customAlert"
-      @custom-paste="customPaste" />
+  <!-- <div
+        id="wangeditor"
+        ref="editorElem"
+        :class="(cls || '') + ' wangEditors'"
+        style="text-align: left"
+    >
+    </div> -->
+  <div :class="props.cls">
+    <MdEditor v-if="!props.disabled" v-model="text" />
+    <template v-else>
+      <MdPreview :editor-id="id" :model-value="text" />
+      <!-- <MdCatalog :editor-id="id" :scroll-element="scrollElement" /> -->
+    </template>
   </div>
 </template>
 
-<script  setup lang="ts">
-import '@wangeditor/editor/dist/css/style.css' // 引入 css
-// import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
-import { onBeforeUnmount, ref, shallowRef, onMounted } from 'vue'
+<script lang="ts" setup>
+import { ref, watch } from 'vue'
+import { MdEditor, MdPreview } from 'md-editor-v3'
+import 'md-editor-v3/lib/style.css'
+import 'md-editor-v3/lib/preview.css'
 
+interface Props {
+  modelValue: string
+  cls?: string
+  isBlind?: boolean
+  uploadUrl?: string
+  disabled?: boolean
+}
 const emit = defineEmits(['update:modelValue'])
-const mode = 'default'
-
-const isClient = ref(false)
-if (import.meta.client) {
-  isClient.value = true
-}
-
-// 编辑器实例，必须用 shallowRef
-const editorRef = shallowRef()
-
-// 内容 HTML
-const valueHtml = ref('<p></p>')
-
-// 模拟 ajax 异步获取内容
-onMounted(() => {
-  setTimeout(() => {
-    valueHtml.value = '<p></p>'
-  }, 1500)
+const props = defineProps<Props>()
+const text = ref(props.modelValue || '')
+const id = 'preview-only'
+watch(props, (val) => {
+  text.value = val.modelValue
 })
-
-const toolbarConfig = {}
-const editorConfig = { placeholder: '请输入文章内容...' }
-
-// 组件销毁时，也及时销毁编辑器
-onBeforeUnmount(() => {
-  const editor = editorRef.value
-  if (editor == null) return
-  editor.destroy()
+watch(text, () => {
+  emit('update:modelValue', text.value)
 })
-
-const handleCreated = (editor: any) => {
-  editorRef.value = editor // 记录 editor 实例，重要！
-}
-
-const handleChange = (editor: any) => {
-  console.log('change:', editor.getHtml())
-  emit('update:modelValue', editor.getHtml())
-}
-
-const handleDestroyed = (editor: any) => {
-  console.log('destroyed', editor)
-}
-
-const handleFocus = (editor: any) => {
-  console.log('focus', editor)
-}
-
-const handleBlur = (editor: any) => {
-  console.log('blur', editor)
-}
-const customAlert = (info: any, type: any) => {
-  alert(`【自定义提示】${type} - ${info}`)
-}
-const customPaste = (editor: any, event: any, callback: any) => {
-  console.log('ClipboardEvent 粘贴事件对象', event)
-  // const html = event.clipboardData.getData('text/html') // 获取粘贴的 html
-  // const text = event.clipboardData.getData('text/plain') // 获取粘贴的纯文本
-  // const rtf = event.clipboardData.getData('text/rtf') // 获取 rtf 数据（如从 word wsp 复制粘贴）
-
-  // 自定义插入内容
-  editor.insertText('xxx')
-
-  // 返回 false ，阻止默认粘贴行为
-  event.preventDefault()
-  callback(false) // 返回值（注意，vue 事件的返回值，不能用 return）
-
-  // 返回 true ，继续默认的粘贴行为
-  // callback(true)
-}
+const scrollElement = document.documentElement
 </script>
 
-<style scoped></style>
+<style>
+    svg.md-editor-icon {
+        width: 22px !important;
+        height: 22px !important;
+    }
+</style>
+<!-- <script lang="ts" setup>
+    import E from 'wangeditor';
+    import 'prismjs/themes/prism.min.css';
+    import { onMounted, ref, watch } from 'vue';
+    import Prism from 'prismjs'; // 导入代码高亮插件的core（里面提供了其他官方插件及代码高亮样式主题，你只需要引入即可）
+    // 引入代码高亮主题（这个去node_modules的安装prismjs中找到想使用的主题即可）
+    interface Props {
+        catchData: (args: any) => void;
+        content: string;
+        cls?: string;
+        isBlind?: boolean;
+        uploadUrl?: string;
+        disabled?: boolean;
+    }
+    const props = defineProps<Props>();
+    const editorElem: any = ref();
+    let editor: any = null;
+    const replaceStyle = (str: string) => {
+        return str
+            .replace('class="JavaScript"', 'class="language-js"')
+            .replace('class="Bash"', 'class="language-bash"');
+    };
+    watch(props, (val: any) => {
+        editor.txt.html(replaceStyle(val.content));
+        Prism.highlightAll();
+    });
+    onMounted(async () => {
+        editor = new E(editorElem.value);
+        // 此处解决光标始终置于尾部问题，需要再使用富文本的页面，再保存的时间上加上一个setTimeout
+        editor.config.onchange = async (html: string) => {
+            if (props.catchData) {
+                await props.catchData(replaceStyle(html));
+                // Prism.highlightAll();
+            } // 把这个html通过catchData的方法传入父组件
+        };
+        // 配置 server 接口地址
+        editor.config.uploadFileName = 'file';
+        // editor.config.uploadImgServer = this.upimgurl + '/yzh/file/upload'
+        // editor.config.height = 500;
+        // editor.config.zIndex = 100
+        if (props.isBlind) {
+            editor.config.menus = [];
+        } else {
+            editor.config.menus = [
+                // 菜单配置
+                'head', // 标题
+                'bold', // 粗体
+                'fontSize', // 字号
+                'fontName', // 字体
+                'italic', // 斜体
+                'underline', // 下划线
+                'strikeThrough', // 删除线
+                'foreColor', // 文字颜色
+                'backColor', // 背景颜色
+                'link', // 插入链接
+                'list', // 列表
+                'justify', // 对齐方式
+                'quote', // 引用
+                'emoticon', // 表情
+                'image', // 插入图片
+                'table', // 表格
+                'code', // 插入代码
+                'undo', // 撤销
+                'redo', // 重复
+            ];
+        }
+        editor.create(); // 创建富文本实例
+        if (!props.content) {
+            editor.txt.html('');
+        } else {
+            await editor.txt.html(replaceStyle(props.content));
+            Prism.highlightAll();
+        }
+        if (props.disabled) {
+            editor.disable();
+        }
+    });
+</script> -->
+
+<!-- <style lang="less" scoped rel="stylesheet/less">
+    :deep(.w-e-text),
+    #wangeditor {
+        height: 100% !important;
+        min-height: 200px !important;
+        z-index: 0;
+    }
+    .w-e-text {
+        overflow-y: auto;
+        code {
+            background: none !important;
+        }
+    }
+    .wangEditors {
+        :deep(.w-e-toolbar),
+        :deep(.w-e-text-container),
+        :deep(.w-e-menu-panel) {
+            background-color: var(--color-fill-2) !important;
+        }
+    }
+    :deep(.w-e-text-container) {
+        height: 85% !important;
+        min-height: 85% !important;
+    }
+</style> -->

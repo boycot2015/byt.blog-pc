@@ -2,6 +2,7 @@
 <script setup>
 // import 'highlight.js/styles/default.css'
 // import 'highlight.js/styles/vs.css'
+import Editor from '@/components/Editor/index'
 
 defineOptions({ name: 'Detail' })
 const route = useRoute()
@@ -54,7 +55,8 @@ definePageMeta({
           <span class="time hidden md:block text-right">发布时间：{{ new Date(indexData.createTime).toLocaleString() }}</span>
         </div>
         <client-only>
-          <p class="text-left content text-justify min-h-[500px] lang-js" v-html="indexData.content" />
+          <Editor v-model="indexData.content" class="!text-left" disabled />
+          <!-- <p class="text-left content text-justify min-h-[500px] lang-js" v-html="indexData.content" /> -->
         </client-only>
       </el-card>
     </NuxtLayout>
