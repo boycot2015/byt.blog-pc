@@ -5,7 +5,6 @@ export default defineNuxtConfig({
   // https://nuxt.com/modules
   modules: [
     '@nuxt/image',
-    '@nuxthub/core',
     '@nuxt/eslint',
   ],
   plugins: [
