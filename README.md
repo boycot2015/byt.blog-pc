@@ -5,7 +5,7 @@
 A personal blog.
 
 <a href="https://boycot.top">
-<img src="./public/images/preview.png" alt="A personal blog" />
+<img src="./preview.png" alt="A personal blog" />
 </a>
 
 ## Features
