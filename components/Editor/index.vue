@@ -6,20 +6,29 @@
         style="text-align: left"
     >
     </div> -->
-  <div :class="props.cls">
-    <MdEditor v-if="!props.disabled" v-model="text" />
+  <div :class="props.cls" class="flex editor">
+    <MdEditor v-if="!props.disabled" v-model="text" :theme="theme" />
     <template v-else>
-      <MdPreview :editor-id="id" :model-value="text" />
-      <!-- <MdCatalog :editor-id="id" :scroll-element="scrollElement" /> -->
+      <MdPreview
+        class="content"
+        :editor-id="id"
+        :model-value="text"
+        :code-foldable="false"
+        :theme="theme" />
+      <div class="catalog">
+        <div class="affix hidden md:block">
+          <MdCatalog :editor-id="id" :scroll-element="scrollElement" />
+        </div>
+      </div>
     </template>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref, watch } from 'vue'
-import { MdEditor, MdPreview } from 'md-editor-v3'
+import { MdEditor, MdPreview, MdCatalog } from 'md-editor-v3'
 import 'md-editor-v3/lib/style.css'
 import 'md-editor-v3/lib/preview.css'
+import { useDark } from '@vueuse/core'
 
 interface Props {
   modelValue: string
@@ -28,6 +37,7 @@ interface Props {
   uploadUrl?: string
   disabled?: boolean
 }
+const isDark = useDark()
 const emit = defineEmits(['update:modelValue'])
 const props = defineProps<Props>()
 const text = ref(props.modelValue || '')
@@ -38,14 +48,37 @@ watch(props, (val) => {
 watch(text, () => {
   emit('update:modelValue', text.value)
 })
-const scrollElement = document.documentElement
+const scrollElement = 'html'
+const theme = computed(() => (isDark.value ? 'dark' : 'light'))
 </script>
 
-<style>
+<style lang="scss">
+.editor {
+    width: 100%;
     svg.md-editor-icon {
         width: 22px !important;
         height: 22px !important;
     }
+    .content {
+        margin-right: var(--gap);
+    }
+    .catalog {
+        .affix {
+            max-height: 100%;
+            overflow: auto;
+            position: sticky;
+            top: 80px;
+            max-width: 220px;
+        }
+    }
+    .md-editor-catalog-indicator {
+        background-color: var(--color-primary);
+    }
+    .md-editor-catalog-link span:hover,
+    .md-editor-catalog-active > span {
+        color: var(--color-primary);
+    }
+}
 </style>
 <!-- <script lang="ts" setup>
     import E from 'wangeditor';

@@ -70,6 +70,7 @@ const setStyles = (opty: number) => {
   }
 }
 onMounted(() => {
+  setStyles(0)
   window.addEventListener('scroll', (e: any) => {
     setStyles(e.target.scrollingElement.scrollTop / document.documentElement.clientHeight)
   })
@@ -84,6 +85,7 @@ const color = computed(() => isDark.value ? 'rgba(0, 0, 0, 0.85)' : 'rgba(255, 2
 :deep(.nav-list .el-tabs__header) {
     margin: 0;
     .el-tabs__item {
+      padding-right: var(--gap);
       text-shadow: 1px 1px 5px v-bind(color);
     }
     // --el-tabs-header-height: 30px;

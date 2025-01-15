@@ -62,7 +62,9 @@ const toggleTheme = (event) => {
   })
 }
 onMounted(() => {
-  showDark.value = window.localStorage.getItem('theme-appearance') === 'dark'
+  nextTick(() => {
+    showDark.value = window.localStorage.getItem('theme-appearance') === 'dark'
+  })
 })
 defineOptions({
   name: 'DarkMode',
