@@ -53,10 +53,10 @@ div<template>
                 </div>
                 <div class="action absolute w-full flex bottom-0 z-[999] bg-[--el-mask-color]">
                   <el-button class="flex-1 rounded-none border-y-0 border-l-0 mr-0" @click="onAction(img, 1)">
-                    设置为壁纸
+                    设置为墙纸
                   </el-button>
                   <el-button class="flex-1 rounded-none border-y-0 border-x-0 !ml-0" @click="onAction(img, 2)">
-                    查看大图
+                    预览大图
                   </el-button>
                 </div>
               </el-col>

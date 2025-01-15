@@ -12,6 +12,15 @@
         <el-form-item label="主题色:">
           <el-color-picker v-model="appConfig.theme.colors.primary" @change="onColorChange" />
         </el-form-item>
+        <el-form-item label="点击特效:">
+          <el-select v-model="appConfig.theme.effect" @change="$effect[appConfig.theme.effect]()">
+            <el-option
+              v-for="item in $effect.list"
+              :key="item.key"
+              :label="item.name"
+              :value="item.key" />
+          </el-select>
+        </el-form-item>
         <el-form-item label-position="top">
           <div class="w-full">
             <div fill class="flex w-full justify-between items-center mb-2">
@@ -62,6 +71,7 @@
 import { Refresh, Loading } from '@element-plus/icons-vue'
 import { actions } from '@/utils/theme'
 
+const { $effect } = useNuxtApp()
 const activeTab = ref('theme')
 const labels = {
   title: '标题',

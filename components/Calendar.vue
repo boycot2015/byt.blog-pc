@@ -177,10 +177,10 @@ export default {
         }
         total
           = (tmp - 1921) * 365
-          + Math.floor((tmp - 1921) / 4)
-          + madd[TheDate.getMonth()]
-          + TheDate.getDate()
-          - 38
+            + Math.floor((tmp - 1921) / 4)
+            + madd[TheDate.getMonth()]
+            + TheDate.getDate()
+            - 38
 
         if (TheDate.getYear() % 4 === 0 && TheDate.getMonth() > 1) {
           total++

@@ -2,6 +2,7 @@
 <script setup>
 // import 'highlight.js/styles/default.css'
 // import 'highlight.js/styles/vs.css'
+import { useDark } from '@vueuse/core'
 import Editor from '@/components/Editor/index'
 
 defineOptions({ name: 'Detail' })
@@ -26,18 +27,19 @@ useHead({ title: indexData.value.title || '博客详情' })
 definePageMeta({
   layout: false,
 })
+const isDark = useDark()
+const color = computed(() => isDark.value ? 'rgba(0, 0, 0, 0.85)' : 'rgba(255, 255, 255, 0.85)')
 </script>
 
 <template>
   <div class="desc">
     <NuxtLayout name="custom">
       <div class="hidden md:flex items-center h-[12vh] md:h-[30vh] mb-[--gap]">
-        <h2 class="text-[22px] md:text-[32px] title">
+        <h2 class="text-[22px] md:text-[32px] title self-end">
           {{ indexData.title }}
         </h2>
       </div>
-      <!-- <NuxtWelcome /> -->
-      <el-card class="flex flex-col justify-start mb-[--gap] text-left backdrop-blur-sm !overflow-visible">
+      <el-card class="flex flex-col justify-start mb-[--gap] text-left backdrop-blur-sm !overflow-visible rounded-xl">
         <template #header>
           <h2 class="self-start block md:hidden flex-2 text-[18px] md:text-[32px]">
             {{ indexData.title }}
@@ -61,10 +63,7 @@ definePageMeta({
             <span class="time hidden md:block text-right">发布时间：{{ new Date(indexData.createTime).toLocaleString() }}</span>
           </div>
         </template>
-        <client-only>
-          <Editor v-model="indexData.content" disabled />
-          <!-- <p class="text-left content text-justify min-h-[500px] lang-js" v-html="indexData.content" /> -->
-        </client-only>
+        <Editor v-model="indexData.content" disabled />
       </el-card>
     </NuxtLayout>
   </div>
@@ -77,12 +76,16 @@ definePageMeta({
   top: 0;
   width: 100%;
 }
-h1 {
-  font-size: 32px;
+:deep(.el-card__body) {
+  padding: 0;
+  border-radius: var(--border-radius);
+}
+h2 {
+  text-shadow: 5px 5px 20px v-bind(color);
 }
 @media (min-width: 768px) {
-  h1 {
-    font-size: 64px;
+  :deep(.el-card__body) {
+    padding: 20px;
   }
 }
 a {
@@ -92,12 +95,7 @@ a {
 :deep(.content) {
   img {
     max-width: 100% !important;
-    margin: 10px auto !important;
-    &.medium-zoom-image {
-      display: inline-block;
-      width: auto!important;
-      margin: 0 !important;
-    }
+    margin: 0 auto !important;
   }
 }
 </style>

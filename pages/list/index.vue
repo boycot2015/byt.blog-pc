@@ -26,7 +26,7 @@ const getData = ({ current = 0, pageSize = 10 } = {}) => {
     current: ++current,
     pageSize: pageSize,
   }
-  $fetch(config.apiBase + '/article', { params: { ...pageData.value, ...query } }).then((data) => {
+  $fetch(config.apiBase + '/article/list', { params: { ...pageData.value, ...query } }).then((data) => {
     indexData.value[0] = [...indexData.value[0], ...data.data[0]]
     pageData.value.total = data.data[1]
     loading.value = false

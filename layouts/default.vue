@@ -1,6 +1,6 @@
 <template>
   <div class="dark:bg-black min-h-[100vh] w-full">
-    <Header />
+    <Header @action="(action, val) => { action === 'setting' && toggleSetting() }" />
     <template v-if="$route.path=='/'">
       <Cover />
       <div class="max-w-[1200px] mx-[auto]">
@@ -15,15 +15,20 @@
       <el-backtop />
     </div>
     <Footer />
+    <Setting v-model="showSetting" />
   </div>
 </template>
 
 <script setup lang="ts">
+import { useToggle } from '@vueuse/core'
 import Cover from './components/cover.vue'
 import Header from './components/header.vue'
 import Aside from './components/aside.vue'
 import Footer from './components/footer.vue'
 import Cate from './components/cate.vue'
+import Setting from './components/settings.vue'
+
+const [showSetting, toggleSetting] = useToggle()
 </script>
 
 <style>

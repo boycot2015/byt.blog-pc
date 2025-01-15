@@ -1,5 +1,9 @@
 <!-- eslint-disable vue/no-v-html -->
 <script setup>
+import Editor from '@/components/Editor/index'
+
+const pageLoading = ref(true)
+const mdText = ref('')
 const websiteConfig = useAppConfig().about
 useHead({ title: '关于博客' })
 definePageMeta({
@@ -13,16 +17,22 @@ const onOpen = (item) => {
   }
   window.location.href = item.url
 }
+onMounted(() => {
+  $fetch('/README.md').then((res) => {
+    mdText.value = res
+    pageLoading.value = false
+  })
+})
 </script>
 
 <template>
   <div class="blog-about">
     <NuxtLayout name="custom">
       <div class="about pd20 rounded-xl w-[100%] md:max-w-[1200px] mx-[auto] bgf text-left">
-        <div class="title text-center mb-[--gap]">
+        <!-- <div class="title text-center mb-[--gap]">
           <h3>关于</h3>
-        </div>
-        <div class="bg-[#006263] m-[auto] mb-3">
+        </div> -->
+        <!-- <div class="bg-[#006263] m-[auto] mb-3">
           <el-image
             lazy
             fit="cover"
@@ -31,18 +41,18 @@ const onOpen = (item) => {
             alt=""
             title="程序猿"
           />
-        </div>
-        <div class="content tl">
-          <div class="content-section">
+        </div> -->
+        <div v-loading="pageLoading" class="content rounded-xl min-h-[60vh] tl">
+          <Editor v-model="mdText" disabled />
+          <!-- <div class="content-section">
             <p class="desc" v-html="websiteConfig.description" />
             <ul class="list">
               <li v-for="item in websiteConfig.list" :key="item.name" class="list-item flex justify-around">
                 <span v-if="item.name" class="name tr">{{ item.name }}:</span>
                 <span class="value flex4">{{ item.value }}</span>
-                <!-- {{ item.name }}: {{ item.value }} -->
               </li>
             </ul>
-          </div>
+          </div> -->
         </div>
         <div class="my-links ">
           <h3 class="title mb-[--gap]">

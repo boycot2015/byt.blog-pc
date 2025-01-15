@@ -78,7 +78,7 @@ const submit = () => {
         >
           <el-form-item prop="content" required class="w-full">
             <client-only>
-              <Editor v-model="formData.content" />
+              <Editor v-model="formData.content" placeholder="请输入留言..." :preview="false" />
             </client-only>
           </el-form-item>
           <el-form-item class="!flex flex-col !mr-0 md:flex-row w-full">

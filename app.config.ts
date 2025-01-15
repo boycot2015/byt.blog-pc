@@ -122,10 +122,11 @@ export default defineAppConfig({
   ],
   theme: {
     dark: true,
+    effect: 'clickText',
     colors: {
       primary: '#2dd4bf',
     },
-    bgUrl: '/images/cover.jpg',
+    bgUrl: '/images/top.jpg',
   },
   about: {
     description: `项目技术栈：Nestjs + Node + Nuxtjs + Mysql <br/> 博客功能主要涉及到文章浏览、详情、文章评论几个模块。

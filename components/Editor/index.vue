@@ -6,8 +6,12 @@
         style="text-align: left"
     >
     </div> -->
-  <div :class="props.cls" class="flex editor">
-    <MdEditor v-if="!props.disabled" v-model="text" :theme="theme" />
+  <div :class="props.cls" class="flex justify-between editor">
+    <MdEditor
+      v-if="!props.disabled"
+      v-model="text"
+      :theme="theme"
+      v-bind="{ ...$attrs }" />
     <template v-else>
       <MdPreview
         class="content"
@@ -15,9 +19,9 @@
         :model-value="text"
         :code-foldable="false"
         :theme="theme" />
-      <div class="catalog">
-        <div class="affix hidden md:block">
-          <MdCatalog :editor-id="id" :scroll-element="scrollElement" />
+      <div class="catalog hidden md:block">
+        <div class="affix">
+          <MdCatalog class="affix" :editor-id="id" :scroll-element="scrollElement" />
         </div>
       </div>
     </template>
@@ -59,9 +63,6 @@ const theme = computed(() => (isDark.value ? 'dark' : 'light'))
         width: 22px !important;
         height: 22px !important;
     }
-    .content {
-        margin-right: var(--gap);
-    }
     .catalog {
         .affix {
             max-height: 100%;
@@ -77,6 +78,9 @@ const theme = computed(() => (isDark.value ? 'dark' : 'light'))
     .md-editor-catalog-link span:hover,
     .md-editor-catalog-active > span {
         color: var(--color-primary);
+    }
+    .md-editor-footer {
+        align-items: center;
     }
 }
 </style>

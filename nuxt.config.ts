@@ -9,10 +9,10 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
   ],
   plugins: [
-    {
-      src: '~/plugins/wang-editor',
-      mode: 'client',
-    },
+    // {
+    //   src: '~/plugins/wang-editor',
+    //   mode: 'client',
+    // },
   ],
   ssr: true,
   // https://devtools.nuxt.com

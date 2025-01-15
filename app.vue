@@ -10,8 +10,11 @@
 // const pageLoading = ref(true)
 import { actions } from '@/utils/theme'
 
+const { $effect } = useNuxtApp()
 const appConfig = useAppConfig()
 onMounted(() => {
+  // $effect.showSpider()
+  $effect[appConfig.theme.effect || 'clickText']()
   actions.setWallpaper({ url: appConfig.theme.bgUrl })
   // 必须在onMounted的时候才能用local和window
   window.onbeforeunload = () => { // 离开页面时保存数据，由于可能突发情况，所以重要数据请手动调用setLocal函数

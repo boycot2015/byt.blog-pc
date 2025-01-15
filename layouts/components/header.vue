@@ -18,20 +18,16 @@
         </el-icon>
       </div>
     </div>
-    <client-only>
-      <Setting v-model="showSetting" />
-    </client-only>
   </div>
 </template>
 
 <script setup lang="ts">
 import { Brush } from '@element-plus/icons-vue'
 import { useToggle, useDark } from '@vueuse/core'
-import Setting from './settings.vue'
 
-const showSetting = ref(false)
+const emit = defineEmits(['action'])
 const isDark = useDark()
-const toggleSetting = useToggle(showSetting)
+const [showSetting, toggleSetting] = useToggle()
 const appConfig = useAppConfig()
 const router = useRouter()
 const route = useRoute()
@@ -53,6 +49,9 @@ const onTabClick = () => {
 }
 watch(route, () => {
   activeTab.value = route.name as string
+})
+watch(showSetting, (val) => {
+  emit('action', 'setting', val)
 })
 watch(isDark, () => {
   styles.value = {

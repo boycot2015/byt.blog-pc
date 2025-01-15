@@ -8,7 +8,7 @@ const clickStar = () => {
         ? (t.body.removeChild(s[e].el), s.splice(e, 1))
         : (s[
             e].y--, s[e].scale += 0.004, s[e].alpha -= 0.013, s[e].el.style.cssText = 'left:' + s[e].x
-            + 'px;top:' + s[e].y + 'px;opacity:' + s[e].alpha + ';transform:scale(' + s[e].scale + ',' + s[e]
+              + 'px;top:' + s[e].y + 'px;opacity:' + s[e].alpha + ';transform:scale(' + s[e].scale + ',' + s[e]
             .scale + ') rotate(45deg);background:' + s[e].color + ';z-index:99999')
       requestAnimationFrame(r)
     }
@@ -99,8 +99,8 @@ const clickText = (textArr: any) => {
         }
         else {
           heart.style.cssText = 'z-index:10;font-size:16px;cursor: default;position: fixed;color:'
-          + c + ';left:' + x + 'px;top:' + y + 'px;opacity:' + a + ';transform:scale('
-          + s + ');'
+            + c + ';left:' + x + 'px;top:' + y + 'px;opacity:' + a + ';transform:scale('
+            + s + ');'
 
           y--
           a -= 0.016
@@ -312,6 +312,7 @@ const showSpider = () => {
 }
 interface EffectProps {
   name: string
+  key: string
   cb: (params?: any) => void
 }
 export {
@@ -322,20 +323,37 @@ export {
 }
 const effect: EffectProps[] = [
   {
+    key: 'clickStar',
     name: '爱心',
     cb: clickStar,
   },
   {
+    key: 'clickText',
     name: '随机文字',
     cb: clickText,
   },
+  // {
+  //   key: 'clickFire',
+  //   name: '烟花',
+  //   cb: clickFire,
+  // },
   {
-    name: '烟花',
-    cb: clickFire,
-  },
-  {
+    key: 'showSpider',
     name: '蜘蛛',
     cb: showSpider,
   },
 ]
-export default effect
+// export default effect
+export default defineNuxtPlugin(() => {
+  return {
+    provide: {
+      effect: {
+        list: effect,
+        clickStar,
+        clickText,
+        clickFire,
+        showSpider,
+      },
+    },
+  }
+})
