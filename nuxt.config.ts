@@ -62,7 +62,6 @@ export default defineNuxtConfig({
     //   mode: 'out-in', // 默认值
     // },
   },
-  // '~/assets/scss/vars.scss',
   css: [
     'element-plus/theme-chalk/dark/css-vars.css',
     'element-plus/dist/index.css',
