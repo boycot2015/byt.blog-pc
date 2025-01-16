@@ -1,6 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 // import prismjs from 'vite-plugin-prismjs'
-import { viteExternalsPlugin } from 'vite-plugin-externals'
+// import { viteExternalsPlugin } from 'vite-plugin-externals'
 import { baseUrl, apiUrl } from './api/baseUrl'
 
 export default defineNuxtConfig({
@@ -25,28 +25,30 @@ export default defineNuxtConfig({
       viewport: 'width=device-width, initial-scale=1',
       script: [{
         src: 'https://cdn.bootcdn.net/ajax/libs/skycons/1396634940/skycons.min.js',
-      }, {
-        src: 'https://cdn.jsdelivr.net/npm/vue@3.5.12/dist/vue.global.min.js',
-      }, {
-        src: 'https://cdn.jsdelivr.net/npm/element-plus@2.8.7/dist/index.full.min.js',
-      }, {
-        src: 'https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js',
-      }, {
-        src: 'https://cdn.jsdelivr.net/npm/md-editor-v3@5.2.1/lib/umd/index.min.js',
-      }],
+      },
+      // {
+      //   src: 'https://cdn.jsdelivr.net/npm/vue@3.5.12/dist/vue.global.min.js',
+      // }, {
+      //   src: 'https://cdn.jsdelivr.net/npm/element-plus@2.8.7/dist/index.full.min.js',
+      // }, {
+      //   src: 'https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js',
+      // }, {
+      //   src: 'https://cdn.jsdelivr.net/npm/md-editor-v3@5.2.1/lib/umd/index.min.js',
+      // },
+      ],
       link: [
-        {
-          rel: 'stylesheet',
-          href: 'https://cdn.jsdelivr.net/npm/element-plus@2.8.7/dist/index.min.css',
-        },
-        {
-          rel: 'stylesheet',
-          href: 'https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css',
-        },
-        {
-          rel: 'stylesheet',
-          href: 'https://cdn.jsdelivr.net/npm/md-editor-v3@5.2.1/lib/style.min.css',
-        },
+        // {
+        //   rel: 'stylesheet',
+        //   href: 'https://cdn.jsdelivr.net/npm/element-plus@2.8.7/dist/index.min.css',
+        // },
+        // {
+        //   rel: 'stylesheet',
+        //   href: 'https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css',
+        // },
+        // {
+        //   rel: 'stylesheet',
+        //   href: 'https://cdn.jsdelivr.net/npm/md-editor-v3@5.2.1/lib/style.min.css',
+        // },
       ],
     },
     pageTransition: {
@@ -75,6 +77,7 @@ export default defineNuxtConfig({
     },
   },
   build: {
+    analyze: true,
     // extend(config, ctx) {
     //   // 添加 externals 配置
     //   config.externals = {
@@ -147,23 +150,23 @@ export default defineNuxtConfig({
       //   'md-editor-v3': 'MdEditorV3',
       // }),
     ],
-    ssr: {
-      external: ['vue', 'prismjs', 'element-plus', 'md-editor-v3'],
-    },
+    // ssr: {
+    //   external: ['vue', 'prismjs', 'element-plus', 'md-editor-v3'],
+    // },
     build: {
-      rollupOptions: {
-      // 不打包依赖
-        external: ['vue', 'prismjs', 'element-plus', 'md-editor-v3'],
-        plugins: [
-          // 不打包依赖映射的对象
-          viteExternalsPlugin({
-            'vue': 'Vue',
-            'prismjs': 'Prismjs',
-            'element-plus': 'ElementPlus',
-            'md-editor-v3': 'MdEditorV3',
-          }),
-        ],
-      },
+      // rollupOptions: {
+      // // 不打包依赖
+      //   external: ['vue', 'prismjs', 'element-plus', 'md-editor-v3'],
+      //   plugins: [
+      //     // 不打包依赖映射的对象
+      //     viteExternalsPlugin({
+      //       'vue': 'Vue',
+      //       'prismjs': 'Prismjs',
+      //       'element-plus': 'ElementPlus',
+      //       'md-editor-v3': 'MdEditorV3',
+      //     }),
+      //   ],
+      // },
     },
   },
   postcss: {
