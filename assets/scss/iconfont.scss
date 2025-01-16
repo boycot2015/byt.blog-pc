@@ -15,10 +15,10 @@
     font-family: 'Font Awesome 6 Free';  /* Font Awesome 6 Free */
     src: url('../fonts/fa-regular-400.ttf') format('woff');
   }
-  @font-face {
-    font-family: 'black';  /* black */
-    src: url('../fonts/black.ttf') format('woff');
-  }
+//   @font-face {
+//     font-family: 'black';  /* black */
+//     src: url('../fonts/black.ttf') format('woff');
+//   }
 .icon-notice:after {
     content: '\e632';
     font-family: 'iconfont';
