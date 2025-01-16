@@ -72,3 +72,6 @@ html.dark::view-transition-new(root) {
   //   background-color: var(--el-mask-color);
   // }
 }
+code[class*=language-], pre[class*=language-] {
+  text-shadow: none;
+}

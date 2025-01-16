@@ -1,5 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import prismjs from 'vite-plugin-prismjs'
+import { viteExternalsPlugin } from 'vite-plugin-externals'
 import { baseUrl, apiUrl } from './api/baseUrl'
 
 export default defineNuxtConfig({
@@ -9,10 +10,10 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
   ],
   plugins: [
-    // {
-    //   src: '~/plugins/wang-editor',
-    //   mode: 'client',
-    // },
+    {
+      src: '~/plugins/prism.ts',
+      mode: 'client',
+    },
   ],
   ssr: true,
   // https://devtools.nuxt.com
@@ -24,19 +25,46 @@ export default defineNuxtConfig({
       viewport: 'width=device-width, initial-scale=1',
       script: [{
         src: 'https://cdn.bootcdn.net/ajax/libs/skycons/1396634940/skycons.min.js',
+      }, {
+        src: 'https://cdn.jsdelivr.net/npm/vue@3.5.12/dist/vue.global.min.js',
+      }, {
+        src: 'https://cdn.jsdelivr.net/npm/element-plus@2.8.7/dist/index.full.min.js',
+      }, {
+        src: 'https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js',
+      }, {
+        src: 'https://cdn.jsdelivr.net/npm/md-editor-v3@5.2.1/lib/umd/index.min.js',
       }],
+      link: [
+        {
+          rel: 'stylesheet',
+          href: 'https://cdn.jsdelivr.net/npm/element-plus@2.8.7/dist/index.min.css',
+        },
+        {
+          rel: 'stylesheet',
+          href: 'https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css',
+        },
+        {
+          rel: 'stylesheet',
+          href: 'https://cdn.jsdelivr.net/npm/md-editor-v3@5.2.1/lib/style.min.css',
+        },
+      ],
     },
     pageTransition: {
       name: 'fade',
       mode: 'out-in', // 默认值
     },
+
     // layoutTransition: {
     //   name: 'slide-fade',
     //   mode: 'out-in', // 默认值
     // },
   },
   // '~/assets/scss/vars.scss',
-  css: ['element-plus/theme-chalk/dark/css-vars.css', 'element-plus/dist/index.css', '~/assets/css/main.css', '~/assets/scss/index.scss'],
+  css: [
+    'element-plus/theme-chalk/dark/css-vars.css',
+    'element-plus/dist/index.css',
+    '~/assets/css/main.css',
+    '~/assets/scss/index.scss'],
   // Env variables - https://nuxt.com/docs/getting-started/configuration#environment-variables-and-private-tokens
   runtimeConfig: {
     public: {
@@ -45,6 +73,8 @@ export default defineNuxtConfig({
       // Can be overridden by NUXT_PUBLIC_HELLO_TEXT environment variable
       helloText: 'Hello from the Edge 👋',
     },
+  },
+  build: {
   },
   routeRules: {
     '/undefined': {
@@ -101,7 +131,28 @@ export default defineNuxtConfig({
         theme: 'tomorrow',
         css: true,
       }),
+      // viteExternalsPlugin({
+      //   'vue': 'Vue',
+      //   'prismjs': 'Prismjs',
+      //   'element-plus': 'ElementPlus',
+      //   'md-editor-v3': 'MdEditorV3',
+      // }),
     ],
+    build: {
+      rollupOptions: {
+      // 不打包依赖
+        external: ['vue', 'prismjs', 'element-plus', 'md-editor-v3'],
+        plugins: [
+          // 不打包依赖映射的对象
+          viteExternalsPlugin({
+            'vue': 'Vue',
+            'prismjs': 'Prismjs',
+            'element-plus': 'ElementPlus',
+            'md-editor-v3': 'MdEditorV3',
+          }),
+        ],
+      },
+    },
   },
   postcss: {
     plugins: {
