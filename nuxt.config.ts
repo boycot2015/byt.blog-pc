@@ -1,5 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-// import prismjs from 'vite-plugin-prismjs'
+import prismjs from 'vite-plugin-prismjs'
 // import { viteExternalsPlugin } from 'vite-plugin-externals'
 import { baseUrl, apiUrl } from './api/baseUrl'
 
@@ -118,31 +118,31 @@ export default defineNuxtConfig({
       },
     },
     plugins: [
-      // prismjs({
-      //   languages: [
-      //     'css',
-      //     'sass',
-      //     'scss',
-      //     'javascript',
-      //     'js',
-      //     'html',
-      //     'swift',
-      //     'xml',
-      //     'typescript',
-      //     'dart',
-      //     'csharp',
-      //     'json',
-      //     'sql',
-      //     'bash',
-      //     'md',
-      //     'nginx',
-      //     'cpp',
-      //     'java',
-      //   ],
-      //   plugins: ['toolbar', 'show-language', 'copy-to-clipboard'],
-      //   theme: 'tomorrow',
-      //   css: true,
-      // }),
+      prismjs({
+        languages: [
+          'css',
+          'sass',
+          'scss',
+          'javascript',
+          'js',
+          'html',
+          'swift',
+          'xml',
+          'typescript',
+          'dart',
+          'csharp',
+          'json',
+          'sql',
+          'bash',
+          'md',
+          'nginx',
+          'cpp',
+          'java',
+        ],
+        plugins: ['toolbar', 'show-language', 'copy-to-clipboard'],
+        theme: 'tomorrow',
+        css: true,
+      }),
       // viteExternalsPlugin({
       //   'vue': 'Vue',
       //   'prismjs': 'Prismjs',
