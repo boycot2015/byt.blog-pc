@@ -1,5 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-import prismjs from 'vite-plugin-prismjs'
+// import prismjs from 'vite-plugin-prismjs'
 import { viteExternalsPlugin } from 'vite-plugin-externals'
 import { baseUrl, apiUrl } from './api/baseUrl'
 
@@ -75,6 +75,15 @@ export default defineNuxtConfig({
     },
   },
   build: {
+    // extend(config, ctx) {
+    //   // 添加 externals 配置
+    //   config.externals = {
+    //     // 例如，将 'vue' 标记为外部依赖
+    //     vue: 'Vue',
+    //     // 如果使用 CDN 加载 axios，也可以将其标记为外部依赖
+    //     axios: 'axios',
+    //   }
+    // },
   },
   routeRules: {
     '/undefined': {
@@ -106,31 +115,31 @@ export default defineNuxtConfig({
       },
     },
     plugins: [
-      prismjs({
-        languages: [
-          'css',
-          'sass',
-          'scss',
-          'javascript',
-          'js',
-          'html',
-          'swift',
-          'xml',
-          'typescript',
-          'dart',
-          'csharp',
-          'json',
-          'sql',
-          'bash',
-          'md',
-          'nginx',
-          'cpp',
-          'java',
-        ],
-        plugins: ['toolbar', 'show-language', 'copy-to-clipboard'],
-        theme: 'tomorrow',
-        css: true,
-      }),
+      // prismjs({
+      //   languages: [
+      //     'css',
+      //     'sass',
+      //     'scss',
+      //     'javascript',
+      //     'js',
+      //     'html',
+      //     'swift',
+      //     'xml',
+      //     'typescript',
+      //     'dart',
+      //     'csharp',
+      //     'json',
+      //     'sql',
+      //     'bash',
+      //     'md',
+      //     'nginx',
+      //     'cpp',
+      //     'java',
+      //   ],
+      //   plugins: ['toolbar', 'show-language', 'copy-to-clipboard'],
+      //   theme: 'tomorrow',
+      //   css: true,
+      // }),
       // viteExternalsPlugin({
       //   'vue': 'Vue',
       //   'prismjs': 'Prismjs',
@@ -138,6 +147,9 @@ export default defineNuxtConfig({
       //   'md-editor-v3': 'MdEditorV3',
       // }),
     ],
+    ssr: {
+      external: ['vue', 'prismjs', 'element-plus', 'md-editor-v3'],
+    },
     build: {
       rollupOptions: {
       // 不打包依赖

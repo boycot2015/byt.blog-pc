@@ -1,35 +1,36 @@
 # nuxt-blog
 
-[English](./README.md) | [中文](./README-CN.md)
+[English](./README-EN.md) | [中文](./README.md)
 
-A personal blog.
+个人博客
 
 <a href="https://boycot.top">
-<img src="./preview.png" alt="A personal blog" />
+<img src="./preview.png" alt="个人博客" />
 </a>
 
-## Features
+## 技术栈
 
-- Server-Side rendering on Cloudflare Workers
-- ESLint setup
-- Ready to add a database, blob and KV storage
-- One click deploy on 275+ locations for free
+- 服务端渲染框架 - Nuxt3
+- mysql
+- Vue3
+- Vite
 
-## Setup
+## 启动
 
-Make sure to install the dependencies with [pnpm](https://pnpm.io/installation#using-corepack):
+安装依赖
 
 ```bash
+# node 16.x
 pnpm install
 ```
 
-You can update the main text displayed by creating a `.env`:
+创建环境变量 `.env`:
 
 ```bash
-NUXT_PUBLIC_HELLO_TEXT="Hello my world!"
+NUXT_PUBLIC_HELLO_TEXT="Hello world!"
 ```
 
-## Development Server
+## 启动项目
 
 Start the development server on `http://localhost:3000`:
 
@@ -37,24 +38,35 @@ Start the development server on `http://localhost:3000`:
 pnpm dev
 ```
 
-## Production
-
-Build the application for production:
+## 打包生产环境
 
 ```bash
 pnpm build
 ```
 
-## Deploy
+# 环境部署
 
-
-Deploy the application on the Edge with [NuxtHub](https://hub.nuxt.com) on your Cloudflare account:
+## 部署在NuxtHub上
 
 ```bash
 npx nuxthub deploy
 ```
 
-Then checkout your server logs, analaytics and more in the [NuxtHub Admin](https://admin.hub.nuxt.com).
 
-You can also deploy using [Cloudflare Pages CI](https://hub.nuxt.com/docs/getting-started/deploy#cloudflare-pages-ci).
+## 部署在Vercel边缘服务器上
+
+ 安装 `Vercel CLI`
+```bash
+npm install -g vercel
+```
+
+`Vercel` 打包生产环境
+```bash
+vercel build --prod
+```
+
+打开vercel配置环境变量 `preset`
+```bash
+PRESET=vercel-edge
+```
 
