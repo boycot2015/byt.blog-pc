@@ -3,14 +3,14 @@
   font-family: 'MI Lan Pro';  /* Mi Lan Pro */
   src: url('../fonts/miLanPro.woff') format('woff');
 }
-@font-face {
-  font-family: 'Font Awesome 6 Free';  /* Font Awesome 6 Free */
-  src: url('../fonts/fa-regular-400.ttf') format('woff');
-}
-@font-face {
-  font-family: 'black';  /* black */
-  src: url('../fonts/black.ttf') format('woff');
-}
+// @font-face {
+//   font-family: 'Font Awesome 6 Free';  /* Font Awesome 6 Free */
+//   src: url('../fonts/fa-regular-400.ttf') format('woff');
+// }
+// @font-face {
+//   font-family: 'black';  /* black */
+//   src: url('../fonts/black.ttf') format('woff');
+// }
 * {
     box-sizing: border-box;
 }
@@ -74,4 +74,7 @@ html.dark::view-transition-new(root) {
 }
 code[class*=language-], pre[class*=language-] {
   text-shadow: none;
+}
+.language-css .token.string, .style .token.string, .token.entity, .token.operator, .token.url {
+  background: inherit;
 }
