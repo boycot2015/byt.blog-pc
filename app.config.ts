@@ -6,6 +6,7 @@ export default defineAppConfig({
   copyright: 'Copyright © Boycot',
   beian: '粤ICP备18002072号',
   policeImg: '/images/icon-police.png',
+  siteTime: '2018-06-04',
   navList: [
     {
       path: '/',

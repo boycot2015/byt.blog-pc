@@ -75,6 +75,7 @@ html.dark::view-transition-new(root) {
 code[class*=language-], pre[class*=language-] {
   text-shadow: none;
 }
+.code-toolbar code,
 .language-css .token.string, .style .token.string, .token.entity, .token.operator, .token.url {
-  background: inherit;
+  background: inherit !important;
 }

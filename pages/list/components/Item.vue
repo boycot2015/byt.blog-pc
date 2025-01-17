@@ -3,10 +3,10 @@
     <nuxt-link :to="`/list/${data.id}`">
       <div class="flex mb-[--gap] rounded-xl overflow-hidden transition-all duration-[500ms] hover:translate-y-[-5px] hover:drop-shadow-xl shadow-xl bg-[--el-mask-color] border border-[--el-border-color] justify-between">
         <el-image
-          v-if="data.img || data.imgUrl || (data.content?getImgUrl(data.content):'')"
+          v-if="data.img || data.imgUrl || (data.content?getImgUrl(data.content):'')||'/images/thumb/1.jpg'"
           lazy
           :style="{ order: index % 2 === 0 ? 1 : 2 }"
-          :src="data.img || data.imgUrl || (data.content?getImgUrl(data.content):'')"
+          :src="data.img || data.imgUrl || (data.content?getImgUrl(data.content):'')||`/images/thumb/${index || 1}.jpg`"
           fit="cover"
           class="w-[180px] h-[160px]" />
         <div class="flex-1 ml-[--gap] p-4 max-w-[100%] max-h-[160px]" :style="{ order: index % 2 === 0 ? 2 : 1 }">

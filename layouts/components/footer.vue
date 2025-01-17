@@ -29,6 +29,9 @@
             邮箱:
             <span> {{ websiteConfig.email || 'boycot2017@163.com' }}</span>
           </p>
+          <p class="site-time">
+            {{ time }}
+          </p>
         </div>
       </div>
     </footer>
@@ -37,12 +40,18 @@
 
 <script setup lang="ts">
 import { useDark } from '@vueuse/core'
+import { siteTime } from '@/utils'
 
+const time = ref()
 const appConfig = useAppConfig()
 const websiteConfig = computed(() => ({ ...appConfig }))
 
 const isDark = useDark()
 const color = computed(() => isDark.value ? 'rgba(0, 0, 0, 0.85)' : 'rgba(255, 255, 255, 0.85)')
+onMounted(() => {
+  // time.value = siteTime()
+  time.value = computed(() => siteTime())
+})
 </script>
 
 <style lang="scss" scoped>

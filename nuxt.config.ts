@@ -15,6 +15,10 @@ export default defineNuxtConfig({
       src: '~/plugins/prism.ts',
       mode: 'client',
     },
+    {
+      src: '~/plugins/meting.ts',
+      mode: 'client',
+    },
   ],
   ssr: true,
   // https://devtools.nuxt.com
@@ -26,6 +30,9 @@ export default defineNuxtConfig({
       viewport: 'width=device-width, initial-scale=1',
       script: [{
         src: 'https://cdn.bootcdn.net/ajax/libs/skycons/1396634940/skycons.min.js',
+      },
+      {
+        src: 'https://hm.baidu.com/hm.js?a2a4a7fe7d81b1bba128d92e6e1c4c91',
       },
       // {
       //   src: 'https://cdn.jsdelivr.net/npm/vue@3.5.12/dist/vue.global.min.js',
@@ -52,10 +59,10 @@ export default defineNuxtConfig({
         // },
       ],
     },
-    pageTransition: {
-      name: 'fade',
-      mode: 'out-in', // 默认值
-    },
+    // pageTransition: {
+    //   name: 'fade',
+    //   mode: 'out-in', // 默认值
+    // },
 
     // layoutTransition: {
     //   name: 'slide-fade',

@@ -16,6 +16,7 @@
     </div>
     <Footer />
     <Setting v-model="showSetting" />
+    <Nav />
   </div>
 </template>
 
@@ -27,6 +28,7 @@ import Aside from './components/aside.vue'
 import Footer from './components/footer.vue'
 import Cate from './components/cate.vue'
 import Setting from './components/settings.vue'
+import Nav from './components/nav.vue'
 
 const [showSetting, toggleSetting] = useToggle()
 </script>
