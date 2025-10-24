@@ -2,3 +2,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: 'miLanPro';
+  src: url('/fonts/miLanPro.woff') format('woff');
+}
+html, body {
+  font-family: 'miLanPro';
+}

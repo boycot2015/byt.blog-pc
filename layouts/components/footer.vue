@@ -1,35 +1,56 @@
 <template>
   <div>
-    <footer class="!w-full relative z-9999 text-center dark:text-white">
-      <div class="wrap w-full md:max-w-[1200px] mx-[auto] flex flex-col lg:flex-row justify-center items-center">
+    <footer class="!w-full relative z-9999 text-center dark:text-white pb-4">
+      <div
+        class="wrap w-full md:max-w-[1200px] mx-[auto] flex flex-col lg:flex-row justify-center items-center"
+      >
         <div class="text-center flex-1">
           <p>Designed By {{ websiteConfig.author }}</p>
-          <p>Copyright © {{ websiteConfig.copyrightTime }}. All Rights Reserved.</p>
-          <a
-            href="http://beian.miit.gov.cn"
-            class="flex items-center justify-center"
-            target="_blank">
-            <img :src="websiteConfig.policeImg" class="mr-2" alt="">
-            {{ websiteConfig.beian || '粤ICP备18002072号' }}
-          </a>
+          <p>
+            Copyright © {{ websiteConfig.copyrightTime }}. All Rights Reserved.
+          </p>
+          <div class="flex items-center justify-center mt-2">
+            <a
+              href="http://beian.miit.gov.cn"
+              class="flex items-center justify-center"
+              target="_blank"
+            >
+              <img src="/svg/icp.svg" class="mr-2" alt="" />
+              <!-- <img :src="websiteConfig.policeImg" class="mr-2" alt="" /> -->
+              <!-- {{ websiteConfig.beian || '粤ICP备18002072号' }} -->
+            </a>
+            <a
+              href="/rss.xml"
+              class="flex items-center justify-center"
+              target="_blank"
+            >
+              <img src="/svg/rss.svg" class="mr-2" alt="" />
+              <!-- <img :src="websiteConfig.policeImg" class="mr-2" alt="" /> -->
+              <!-- {{ websiteConfig.beian || '粤ICP备18002072号' }} -->
+            </a>
+          </div>
         </div>
-        <div class="right text-left">
+        <div class="right md:text-left">
           <p>
             <i class="icon-github icon" />
             Github:
             <a
-              :href="`http://${websiteConfig.gitHub ? websiteConfig.gitHub : 'boycot2015@github.com'}`"
+              :href="`http://${
+                websiteConfig.gitHub
+                  ? websiteConfig.gitHub
+                  : 'boycot2015@github.com'
+              }`"
               target="_blank"
               rel="noopener noreferrer"
-            >{{ websiteConfig.gitHub || 'boycot2015@github.com' }}
+            >{{ websiteConfig.gitHub || "boycot2015@github.com" }}
             </a>
           </p>
           <p>
             <i class="icon-email icon" />
             邮箱:
-            <span> {{ websiteConfig.email || 'boycot2017@163.com' }}</span>
+            <span> {{ websiteConfig.email || "boycot2017@163.com" }}</span>
           </p>
-          <p class="site-time">
+          <p class="site-time text-[var(--color-primary)]">
             {{ time }}
           </p>
         </div>
@@ -40,14 +61,16 @@
 
 <script setup lang="ts">
 import { useDark } from '@vueuse/core'
-import { siteTime } from '@/utils'
+import { siteTime } from '@/utils/index'
 
 const time = ref()
 const appConfig = useAppConfig()
 const websiteConfig = computed(() => ({ ...appConfig }))
 
 const isDark = useDark()
-const color = computed(() => isDark.value ? 'rgba(0, 0, 0, 0.85)' : 'rgba(255, 255, 255, 0.85)')
+const color = computed(() =>
+  isDark.value ? 'rgba(0, 0, 0, 0.85)' : 'rgba(255, 255, 255, 0.85)',
+)
 onMounted(() => {
   // time.value = siteTime()
   time.value = computed(() => siteTime())
@@ -56,7 +79,7 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 footer {
-    user-select: none;
-    text-shadow: 10px 10px 100px v-bind(color);
+  user-select: none;
+  text-shadow: 10px 10px 100px v-bind(color);
 }
 </style>

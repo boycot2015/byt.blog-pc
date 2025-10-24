@@ -8,8 +8,8 @@
           :style="{ order: index % 2 === 0 ? 1 : 2 }"
           :src="data.img || data.imgUrl || (data.content?getImgUrl(data.content):'')||`/images/thumb/${index || 1}.jpg`"
           fit="cover"
-          class="w-[180px] h-[160px]" />
-        <div class="flex-1 ml-[--gap] p-4 max-w-[100%] max-h-[160px]" :style="{ order: index % 2 === 0 ? 2 : 1 }">
+          class="max-w-[120px] min-w-[160px] md:max-w-[200px] md:min-w-[180px] h-[160px]" />
+        <div class="flex-1 ml-[--gap] p-4 max-w-[740px] max-h-[160px]" :style="{ order: index % 2 === 0 ? 2 : 1 }">
           <div class="title line-clamp-1 text-[16px]">
             {{ data.title }}
           </div>

@@ -214,3 +214,5 @@ export const siteTime = (siteTime = '2025-01-01') => {
   return ' 已运行 ' + diffYears + ' 年 ' + diffDays + ' 天 ' + diffHours + ' 小时 ' + diffMinutes + ' 分钟 '
   // document.getElementById('sitetime').innerHTML = ' 已运行 ' + diffYears + ' 年 ' + diffDays + ' 天 ' + diffHours + ' 小时 ' + diffMinutes + ' 分钟 ' + diffSeconds + ' 秒'
 }
+// 获取文章的描述
+export const getDescription = (content, num = 150) => content.replace(/<[^>]+>/g, '').replace(/\s+/g, '').slice(0, num) || '暂无简介'
