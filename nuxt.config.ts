@@ -35,11 +35,10 @@ export default defineNuxtConfig({
         src: 'https://hm.baidu.com/hm.js?a2a4a7fe7d81b1bba128d92e6e1c4c91',
       },
       {
-        'src': 'https://blog-new.boycot.top/tracker.min.js',
+        'src': 'https://byt-blog-pc.pages.dev/tracker.min.js',
         'defer': true,
-        'data-website-id': 'blog-new',
+        'data-website-id': 'byt-blog-pc',
       },
-        // <script defer src="https://blog-new.boycot.top/tracker.min.js" data-website-id="blog-new"></script>
         // {
         //   src: 'https://cdn.jsdelivr.net/npm/vue@3.5.12/dist/vue.global.min.js',
         // }, {
