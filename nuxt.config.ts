@@ -34,15 +34,21 @@ export default defineNuxtConfig({
       {
         src: 'https://hm.baidu.com/hm.js?a2a4a7fe7d81b1bba128d92e6e1c4c91',
       },
-      // {
-      //   src: 'https://cdn.jsdelivr.net/npm/vue@3.5.12/dist/vue.global.min.js',
-      // }, {
-      //   src: 'https://cdn.jsdelivr.net/npm/element-plus@2.8.7/dist/index.full.min.js',
-      // }, {
-      //   src: 'https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js',
-      // }, {
-      //   src: 'https://cdn.jsdelivr.net/npm/md-editor-v3@5.2.1/lib/umd/index.min.js',
-      // },
+      {
+        'src': 'https://blog-new.boycot.top/tracker.min.js',
+        'defer': true,
+        'data-website-id': 'blog-new',
+      },
+        // <script defer src="https://blog-new.boycot.top/tracker.min.js" data-website-id="blog-new"></script>
+        // {
+        //   src: 'https://cdn.jsdelivr.net/npm/vue@3.5.12/dist/vue.global.min.js',
+        // }, {
+        //   src: 'https://cdn.jsdelivr.net/npm/element-plus@2.8.7/dist/index.full.min.js',
+        // }, {
+        //   src: 'https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js',
+        // }, {
+        //   src: 'https://cdn.jsdelivr.net/npm/md-editor-v3@5.2.1/lib/umd/index.min.js',
+        // },
       ],
       link: [
         // {
