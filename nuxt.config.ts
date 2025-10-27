@@ -35,7 +35,7 @@ export default defineNuxtConfig({
         src: 'https://hm.baidu.com/hm.js?a2a4a7fe7d81b1bba128d92e6e1c4c91',
       },
       {
-        'src': 'https://byt-blog-pc.pages.dev/tracker.min.js',
+        'src': 'https://byt-blog-pc.pages.dev/js/analytics.min.js',
         'defer': true,
         'data-website-id': 'byt-blog-pc',
       },
